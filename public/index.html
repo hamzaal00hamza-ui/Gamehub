@@ -557,15 +557,22 @@ footer{background:#0a0a12;border-top:1px solid var(--br);padding:16px 11px}
 // Token: stored securely, injected per-request
 // ============================================================
 
-const API_BASE  = 'https://game-hub-production-062a.up.railway.app/api/fc';
+const API_BASE  = 'https://game-hub-production-31dd.up.railway.app/api/fc';
 const API_TOKEN = ''; // Token handled securely on server
 const PROFIT_MARGIN = 0.15; // 15% هامش ربح افتراضي — قابل للتعديل من الأدمن
 
 // ─── API HELPERS ───────────────────────────────────────────
 async function apiGet(path) {
-  const res = await fetch(API_BASE + path);
-  if (!res.ok) throw new Error('API Error ' + res.status);
-  return res.json();
+  const url = API_BASE + path;
+  console.log('📡 GET:', url);
+  const res = await fetch(url, { 
+    method: 'GET',
+    headers: { 'Accept': 'application/json' },
+    mode: 'cors'
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status + ' on ' + path);
+  const data = await res.json();
+  return data;
 }
 
 async function apiPost(path, params = {}) {
@@ -617,7 +624,8 @@ async function loadAPIProducts() {
     toast('✅ تم تحميل ' + apiProducts.length + ' منتج من FastCard', 'ok');
   } catch (e) {
     hideApiLoader();
-    toast('⚠️ تعذر الاتصال بـ FastCard — عرض المنتجات المحلية', 'er');
+    console.error('❌ API Error:', e.message);
+    toast('⚠️ ' + e.message.slice(0,50), 'er');
     apiLoaded = false;
   }
 }
@@ -629,7 +637,7 @@ function renderAPIHome() {
   if (!homeGrid) return;
 
   homeGrid.innerHTML = apiCategories.map(cat => {
-    const img = cat.items[0]?.category_image || cat.items[0]?.cat_image || '';
+    const img = cat.items[0]?.category_image || cat.items[0]?.cat_image || cat.items[0]?.image || '';
     const ic = getCatIcon(cat.name);
     return `<div class="fc-cat-card" onclick="openAPICategory('${encodeURIComponent(cat.name)}')">
       ${img
