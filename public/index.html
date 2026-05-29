@@ -1,1 +1,2477 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameZone</title>
+<meta name="description" content="متجر GameZone - شحن ألعاب وبطاقات رقمية بأسعار منافسة مع شحن أوتوماتيك فوري">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--p:#16a34a;--pd:#15803d;--g:rgba(22,163,74,.18);--bg:#0a0a0f;--c1:#111118;--c2:#16161f;--c3:#1c1c28;--br:rgba(255,255,255,.07);--tx:#f1f1f1;--mu:#777;--grn:#22c55e;--red:#ef4444;--blue:#3b82f6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit}
+input,select{font-family:inherit}
+#ldr{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s}
+#ldr.off{opacity:0;pointer-events:none}
+.lr{width:44px;height:44px;border:3px solid var(--br);border-top-color:var(--p);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tb{background:#0a0a12;border-bottom:1px solid var(--br);padding:5px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.wp{display:flex;align-items:center;gap:4px;background:rgba(37,209,102,.1);border:1px solid rgba(37,209,102,.2);padding:2px 9px;border-radius:20px;color:#25d166;font-size:11px;font-weight:700}
+.tb-r{display:flex;gap:8px}
+.sico{width:24px;height:24px;border-radius:6px;background:var(--c2);display:flex;align-items:center;justify-content:center;font-size:11px;transition:background .2s}
+.sico:hover{background:var(--p)}
+header{height:54px;background:rgba(10,10,18,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--br);display:flex;align-items:center;padding:0 13px;gap:11px;position:sticky;top:31px;z-index:90}
+.hbg{background:none;border:none;display:flex;flex-direction:column;gap:4px;padding:6px;border-radius:7px}
+.hbg:hover{background:var(--c2)}
+.hbg span{display:block;width:19px;height:2px;background:var(--tx);border-radius:2px}
+.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:900;flex:1}
+.lic{width:30px;height:30px;background:linear-gradient(135deg,var(--p),var(--pd));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 0 10px var(--g)}
+.logo em{color:#4ade80;font-style:normal}
+.srchw{flex:1;max-width:320px;position:relative}
+.srchw input{width:100%;background:var(--c2);border:1px solid var(--br);border-radius:9px;padding:7px 12px 7px 32px;color:var(--tx);font-size:13px;outline:none;transition:border .2s}
+.srchw input:focus{border-color:var(--p)}
+.srchw input::placeholder{color:var(--mu)}
+.srchi{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--mu);font-size:13px;pointer-events:none}
+.hdr-r{display:flex;gap:7px;align-items:center}
+.wbal{display:flex;align-items:center;gap:5px;background:var(--c2);border:1px solid var(--br);border-radius:8px;padding:5px 11px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.wbal:hover{border-color:var(--p)}
+.wbal-n{color:var(--p)}
+.btn-in{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;box-shadow:0 3px 10px var(--g);transition:all .2s}
+.btn-in:hover{transform:translateY(-1px)}
+.sbo{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+.sbo.on{opacity:1;pointer-events:all}
+.sb{position:fixed;top:0;right:-100%;width:255px;height:100vh;background:var(--c1);border-left:1px solid var(--br);z-index:201;transition:right .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto}
+.sb.on{right:0}
+.sbh{padding:13px;border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between}
+.sbx{background:none;border:none;color:var(--mu);font-size:18px}
+.sbx:hover{color:var(--p)}
+.sb-wcard{margin:11px;background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(234,88,12,.05));border:1px solid rgba(249,115,22,.18);border-radius:12px;padding:13px}
+.sb-wlbl{font-size:10px;color:var(--mu);margin-bottom:3px}
+.sb-wamt{font-size:22px;font-weight:900;color:var(--p)}
+.sb-wcur{font-size:10px;color:var(--mu);margin-top:1px}
+.sb-wbtn{width:100%;background:linear-gradient(135deg,var(--p),var(--pd));border:none;border-radius:8px;padding:8px;color:#fff;font-size:12px;font-weight:700;margin-top:9px;display:flex;align-items:center;justify-content:center;gap:5px}
+.sbn{padding:9px;flex:1}
+.sbn a{display:flex;align-items:center;gap:9px;padding:10px 11px;border-radius:8px;color:var(--tx);font-size:13px;font-weight:500;transition:all .2s;margin-bottom:2px}
+.sbn a:hover,.sbn a.on{background:var(--g);color:var(--p)}
+.sb-div{font-size:10px;color:var(--mu);padding:7px 11px 3px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);z-index:300;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:0}
+.ov.on{opacity:1;pointer-events:all}
+@media(min-width:600px){.ov{align-items:center;padding:16px}}
+.modal{background:var(--c1);border:1px solid var(--br);border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;transform:translateY(40px);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+@media(min-width:600px){.modal{border-radius:20px;transform:scale(.95)}}
+.ov.on .modal{transform:translateY(0)}
+@media(min-width:600px){.ov.on .modal{transform:scale(1)}}
+.mh{padding:16px 16px 12px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:10px;position:sticky;top:0;background:var(--c1);z-index:2;border-radius:20px 20px 0 0}
+.mt{font-size:15px;font-weight:800;flex:1}
+.mx{background:none;border:none;color:var(--mu);font-size:18px;transition:color .2s}
+.mx:hover{color:var(--p)}
+.mb{padding:16px}
+.fg{margin-bottom:12px}
+.fl{font-size:11px;font-weight:700;color:var(--mu);margin-bottom:5px;display:block}
+.fi{width:100%;background:var(--c2);border:1px solid var(--br);border-radius:9px;padding:10px 12px;color:var(--tx);font-size:14px;outline:none;transition:border .2s}
+.fi:focus{border-color:var(--p)}
+.fi::placeholder{color:var(--mu)}
+.bp{width:100%;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;box-shadow:0 4px 14px var(--g);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
+.bp:hover:not(:disabled){transform:translateY(-1px)}
+.bp:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.bs{width:100%;background:var(--c2);border:1px solid var(--br);border-radius:10px;padding:11px;font-size:13px;font-weight:600;color:var(--tx);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
+.bs:hover{border-color:var(--p);color:var(--p)}
+.bwa{width:100%;background:linear-gradient(135deg,#25d166,#128c4e);color:#fff;border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:700;box-shadow:0 4px 12px rgba(37,209,102,.3);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:8px}
+.bwa:hover{transform:translateY(-1px)}
+.stbar{display:flex;background:var(--c2);border-radius:10px;overflow:hidden;border:1px solid var(--br);margin-bottom:16px}
+.sth{flex:1;padding:7px 3px;text-align:center;font-size:10px;font-weight:700;color:var(--mu);transition:all .3s}
+.sth.cur{background:var(--p);color:#fff}
+.sth.dn{background:rgba(34,197,94,.13);color:var(--grn)}
+.ib{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.18);border-radius:9px;padding:10px 12px;font-size:12px;color:#93c5fd;margin-bottom:12px;line-height:1.7}
+.wb{background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.18);border-radius:9px;padding:10px 12px;font-size:12px;color:#fdba74;margin-bottom:12px;line-height:1.7}
+.gb{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.18);border-radius:9px;padding:10px 12px;font-size:12px;color:#86efac;margin-bottom:12px;line-height:1.7}
+.rb{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.18);border-radius:9px;padding:10px 12px;font-size:12px;color:#fca5a5;margin-bottom:12px;line-height:1.7}
+.dmc{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.dm{background:var(--c2);border:2px solid var(--br);border-radius:12px;padding:13px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;position:relative;overflow:hidden}
+.dm::before{content:'';position:absolute;inset:0;background:var(--g);opacity:0;transition:opacity .3s}
+.dm:hover{border-color:var(--p)}
+.dm.on{border-color:var(--p)}
+.dm.on::before{opacity:1}
+.dm-ic{font-size:28px;z-index:1;width:36px;text-align:center}
+.dm-info{flex:1;z-index:1}
+.dm-nm{font-size:14px;font-weight:800}
+.dm-ds{font-size:11px;color:var(--mu);margin-top:2px}
+.dm-num{font-size:13px;font-weight:700;color:var(--p);margin-top:3px;direction:ltr}
+.dm-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--br);transition:all .2s;flex-shrink:0;z-index:1}
+.dm.on .dm-radio{border-color:var(--p);background:var(--p);box-shadow:0 0 0 3px var(--g)}
+.achips{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px}
+.ac{background:var(--c2);border:2px solid var(--br);border-radius:9px;padding:9px 5px;cursor:pointer;text-align:center;transition:all .2s}
+.ac:hover{border-color:var(--p)}
+.ac.on{border-color:var(--p);background:var(--g);color:var(--p)}
+.ac-v{font-size:13px;font-weight:800}
+.ac-s{font-size:9px;color:var(--mu);margin-top:1px}
+.ac.on .ac-s{color:inherit;opacity:.7}
+.numbox{background:var(--c3);border:1px solid var(--br);border-radius:11px;padding:14px;margin-bottom:12px}
+.numbox-lbl{font-size:11px;color:var(--mu);margin-bottom:5px}
+.numbox-val{font-size:24px;font-weight:900;color:var(--p);direction:ltr;letter-spacing:1px}
+.numbox-sub{font-size:11px;color:var(--mu);margin-top:3px}
+.copy-row{display:flex;align-items:center;gap:8px;margin-top:9px}
+.cbtn{background:var(--c1);border:1px solid var(--br);border-radius:7px;padding:5px 12px;font-size:11px;color:var(--mu);font-weight:700;transition:all .2s}
+.cbtn:hover{border-color:var(--p);color:var(--p)}
+.osum{background:var(--c2);border:1px solid var(--br);border-radius:10px;padding:12px;margin-bottom:12px}
+.or{display:flex;justify-content:space-between;font-size:13px;padding:4px 0}
+.or:not(:last-child){border-bottom:1px solid var(--br);padding-bottom:6px;margin-bottom:6px}
+.or.tot{font-size:15px;font-weight:900;color:var(--p)}
+.qty-wrap{background:var(--c2);border:1px solid var(--br);border-radius:11px;padding:14px;margin-bottom:12px}
+.qty-lbl{font-size:11px;color:var(--mu);margin-bottom:10px;font-weight:700}
+.qty-ctl{display:flex;align-items:center;gap:12px;justify-content:center}
+.qty-btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--br);background:var(--c1);color:var(--tx);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-weight:700}
+.qty-btn:hover{border-color:var(--p);color:var(--p)}
+.qty-val{font-size:22px;font-weight:900;min-width:40px;text-align:center;color:var(--p)}
+.qty-total{text-align:center;margin-top:8px;font-size:12px;color:var(--mu)}
+.qty-total strong{color:var(--p);font-size:16px}
+.pbar{background:var(--br);border-radius:4px;height:4px;overflow:hidden;margin-bottom:16px}
+.pfill{height:100%;background:linear-gradient(90deg,var(--p),var(--pd));transition:width .9s ease}
+.sucbox{text-align:center;padding:14px 0}
+.suci{font-size:58px;margin-bottom:11px;animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+.suct{font-size:19px;font-weight:900;margin-bottom:5px}
+.sucm{font-size:12px;color:var(--mu);line-height:1.6;margin-bottom:14px}
+.sucid{background:var(--c2);border:1px solid var(--br);border-radius:9px;padding:9px 13px;font-size:12px;font-weight:700;color:var(--p);margin-bottom:12px;letter-spacing:.5px}
+.si{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
+main{min-height:calc(100vh - 90px)}
+.pg{display:none}
+.pg.on{display:block}
+.slw{position:relative;margin:11px;border-radius:15px;overflow:hidden;height:250px;box-shadow:0 5px 25px rgba(0,0,0,.5)}
+.str{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.sl{min-width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sl1{background:linear-gradient(135deg,#1a0a2e,#0d1b4b)}
+.sl2{background:linear-gradient(135deg,#180000,#2c0800)}
+.sl3{background:linear-gradient(135deg,#001829,#00100d)}
+.slb{position:absolute;border-radius:50%;filter:blur(50px);opacity:.22}
+.slct{text-align:center;z-index:2;padding:18px}
+.slbdg{display:inline-flex;align-items:center;gap:4px;background:var(--g);border:1px solid var(--p);color:var(--p);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;margin-bottom:8px}
+.sl h1{font-size:22px;font-weight:900;line-height:1.2;margin-bottom:7px}
+.sl h1 em{color:var(--p);font-style:normal}
+.sl p{font-size:11px;color:var(--mu);margin-bottom:11px}
+.slbtn{display:inline-flex;align-items:center;gap:5px;background:var(--p);color:#fff;padding:8px 16px;border-radius:9px;font-weight:700;font-size:12px;transition:all .2s}
+.slbtn:hover{transform:translateY(-2px)}
+.dts{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5}
+.dt{width:5px;height:5px;border-radius:3px;background:rgba(255,255,255,.3);border:none;transition:all .3s}
+.dt.on{background:var(--p);width:16px}
+.sla{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid var(--br);color:#fff;border-radius:7px;width:28px;height:28px;font-size:14px;z-index:5;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.sla:hover{background:var(--p)}
+.sla.p{right:9px}.sla.n{left:9px}
+.hiw{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:0 11px 11px}
+.hiwc{background:var(--c1);border:1px solid var(--br);border-radius:11px;padding:13px 9px;text-align:center}
+.hiwi{font-size:22px;margin-bottom:6px}
+.hiwt{font-size:11px;font-weight:700;margin-bottom:3px}
+.hiws{font-size:10px;color:var(--mu);line-height:1.4}
+.promo{margin:0 11px 11px;background:linear-gradient(135deg,rgba(249,115,22,.07),transparent);border:1px solid rgba(249,115,22,.14);border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;font-size:11px;color:var(--p);animation:pb 2.5s ease infinite}
+@keyframes pb{0%,100%{border-color:rgba(249,115,22,.14)}50%{border-color:rgba(249,115,22,.38)}}
+.promo span{flex:1;font-size:10px}
+.pc{background:var(--p);color:#fff;border-radius:5px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap}
+.sts{display:flex;background:var(--c1);border:1px solid var(--br);border-radius:11px;margin:0 11px 11px;overflow:hidden}
+.st{flex:1;padding:10px 11px;text-align:center;border-left:1px solid var(--br)}
+.st:last-child{border-left:none}
+.stn{font-size:15px;font-weight:900;color:var(--p)}
+.stl{font-size:9px;color:var(--mu);margin-top:1px}
+.sec{padding:0 11px 14px}
+.sect{font-size:14px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.sect::before{content:'';display:block;width:3px;height:16px;background:var(--p);border-radius:2px}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:7px}
+.cc{background:var(--c1);border:1px solid var(--br);border-radius:11px;padding:13px 9px;text-align:center;color:var(--tx);transition:all .2s;display:block;position:relative;overflow:hidden}
+.cc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--g),transparent);opacity:0;transition:opacity .3s}
+.cc:hover{border-color:var(--p);transform:translateY(-2px)}
+.cc:hover::before{opacity:1}
+.ci{font-size:21px;margin-bottom:6px;display:block}
+.cn{font-size:11px;font-weight:700}
+.cct{font-size:9px;color:var(--mu);margin-top:2px}
+.pgb{padding:10px 11px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--br);background:var(--c1);position:sticky;top:85px;z-index:50}
+.bk{background:var(--c2);border:1px solid var(--br);border-radius:7px;padding:5px 10px;color:var(--tx);font-size:11px;display:flex;align-items:center;gap:4px;transition:all .2s}
+.bk:hover{border-color:var(--p);color:var(--p)}
+.pgbt{font-size:13px;font-weight:800}
+.pgbc{font-size:10px;color:var(--mu);margin-right:auto}
+.brd{display:flex;align-items:center;gap:4px;padding:8px 11px;font-size:11px;color:var(--mu);flex-wrap:wrap}
+.brd a{cursor:pointer;transition:color .2s}
+.brd a:hover{color:var(--p)}
+.brd span{color:var(--p)}
+.pg2{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;padding:11px}
+.pcard{background:var(--c1);border:1px solid var(--br);border-radius:11px;padding:12px;cursor:pointer;transition:all .2s;text-align:center}
+.pcard:hover{border-color:var(--p);transform:translateY(-2px)}
+.pcai{font-size:24px;margin-bottom:6px}
+.pcan{font-size:12px;font-weight:700;margin-bottom:2px}
+.pcas{font-size:10px;color:var(--mu)}
+.pcaa{margin-top:6px;font-size:10px;color:var(--p)}
+.slist{display:flex;flex-direction:column;gap:7px;padding:11px}
+.srow{background:var(--c1);border:1px solid var(--br);border-radius:10px;padding:12px 13px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s}
+.srow:hover{border-color:var(--p);background:var(--g)}
+.sri{font-size:20px}
+.sri2{flex:1}
+.srn{font-size:13px;font-weight:700}
+.srd{font-size:10px;color:var(--mu);margin-top:1px}
+.srp{font-size:14px;font-weight:900;color:var(--p);white-space:nowrap}
+.msrch{padding:9px 11px;border-bottom:1px solid var(--br)}
+.msrch input{width:100%;background:var(--c2);border:1px solid var(--br);border-radius:9px;padding:9px 12px;color:var(--tx);font-size:13px;outline:none}
+.msrch input:focus{border-color:var(--p)}
+.cta{margin:0 11px 11px;background:linear-gradient(135deg,#0f0f1a,#180f0a);border:1px solid var(--br);border-radius:14px;padding:24px 14px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;width:260px;height:260px;background:radial-gradient(circle,var(--g),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+.cta h2{font-size:16px;font-weight:900;margin-bottom:5px;position:relative}
+.cta p{font-size:11px;color:var(--mu);margin-bottom:13px;position:relative}
+.wabig{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#25d166,#128c4e);color:#fff;padding:10px 22px;border-radius:10px;font-weight:700;font-size:13px;box-shadow:0 4px 14px rgba(37,209,102,.3);position:relative;transition:all .2s}
+.wabig:hover{transform:translateY(-2px)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--c1);border:1px solid var(--br);border-radius:10px;padding:10px 16px;font-size:12px;font-weight:700;z-index:999;transition:transform .3s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.toast.on{transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:var(--grn);color:var(--grn)}
+.toast.er{border-color:var(--red);color:var(--red)}
+.toast.in{border-color:var(--blue);color:#93c5fd}
+footer{background:#0a0a12;border-top:1px solid var(--br);padding:16px 11px}
+.fin{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.fb{font-size:13px;font-weight:700}
+.fb em{color:var(--p);font-style:normal}
+.fls{display:flex;gap:12px;flex-wrap:wrap}
+.fls a{font-size:11px;color:var(--mu);transition:color .2s}
+.fls a:hover{color:var(--p)}
+.fso{display:flex;gap:6px}
+.fsi{width:28px;height:28px;border-radius:7px;background:var(--c2);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--mu);font-size:11px;transition:all .2s}
+.fsi:hover{border-color:var(--p);color:var(--p)}
+.fcp{text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--br);font-size:11px;color:var(--mu)}
+.fcp a{color:var(--p)}
+.poll-box{background:var(--c3);border:1px solid rgba(249,115,22,.2);border-radius:12px;padding:16px;margin-bottom:12px;text-align:center}
+.poll-ic{font-size:32px;margin-bottom:8px}
+.poll-t{font-size:13px;font-weight:800;margin-bottom:4px}
+.poll-s{font-size:11px;color:var(--mu);margin-bottom:12px;line-height:1.6}
+.poll-dots{display:flex;justify-content:center;gap:5px;margin-bottom:10px}
+.poll-dot{width:7px;height:7px;border-radius:50%;background:var(--p);animation:pdot 1.2s ease-in-out infinite}
+.poll-dot:nth-child(2){animation-delay:.2s}
+.poll-dot:nth-child(3){animation-delay:.4s}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.5)}}
+.poll-timer{font-size:22px;font-weight:900;color:var(--p);direction:ltr}
+.poll-sub{font-size:10px;color:var(--mu);margin-top:2px}
+@media(max-width:600px){.slw{height:210px;margin:8px}.sl h1{font-size:18px}.cg{grid-template-columns:repeat(3,1fr)}.pg2{grid-template-columns:repeat(2,1fr);padding:8px}.slist{padding:8px}.achips{grid-template-columns:repeat(3,1fr)}}
 
+/* API Product Styles */
+.field-box{background:var(--c2);border:1px solid var(--br);border-radius:10px;padding:13px;margin-bottom:12px}
+.qty-wrap{background:var(--c2);border:1px solid var(--br);border-radius:11px;padding:14px;margin-bottom:12px}
+.qty-lbl{font-size:11px;color:var(--mu);margin-bottom:10px;font-weight:700}
+.qty-ctl{display:flex;align-items:center;gap:12px;justify-content:center}
+.qty-btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--br);background:var(--c1);color:var(--tx);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-weight:700}
+.qty-btn:hover{border-color:var(--p);color:var(--p)}
+.qty-val{font-size:22px;font-weight:900;min-width:40px;text-align:center;color:var(--p)}
+.qty-total{text-align:center;margin-top:8px;font-size:12px;color:var(--mu)}
+.qty-total strong{color:var(--p);font-size:16px}
+.pbar{background:var(--br);border-radius:4px;height:4px;overflow:hidden;margin-bottom:16px}
+.pfill{height:100%;background:linear-gradient(90deg,var(--p),var(--pd));transition:width .9s ease}
+
+/* FastCard-style product list */
+.fc-prod-list{display:flex;flex-direction:column;gap:9px;padding:11px}
+.fc-prod-item{background:var(--c1);border:1px solid var(--br);border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.fc-prod-item:hover{border-color:var(--p);background:var(--g)}
+.fc-prod-item.unavail{opacity:.45;cursor:not-allowed}
+.fc-prod-item.unavail:hover{border-color:var(--br);background:var(--c1)}
+.fc-prod-img{width:52px;height:52px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1px solid var(--br);background:var(--c2)}
+.fc-prod-img-ph{width:52px;height:52px;border-radius:10px;flex-shrink:0;background:var(--c2);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:24px}
+.fc-prod-info{flex:1;min-width:0}
+.fc-prod-name{font-size:14px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fc-prod-auto{font-size:10px;color:var(--p);font-weight:600}
+.fc-prod-price{font-size:14px;font-weight:900;color:var(--p);white-space:nowrap;text-align:left;direction:ltr}
+.fc-prod-price-sub{font-size:10px;color:var(--mu);text-align:left}
+.fc-unavail-tag{position:absolute;top:8px;right:8px;background:rgba(239,68,68,.15);color:var(--red);border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700}
+
+/* ── FastCard Exact Style ── */
+.fc-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px}
+.fc-cat-card{background:var(--c1);border:1px solid var(--br);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .22s;text-align:center}
+.fc-cat-card:hover{border-color:var(--p);transform:translateY(-2px)}
+.fc-cat-img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--c2)}
+.fc-cat-img-ph{width:100%;aspect-ratio:1;background:var(--c2);display:flex;align-items:center;justify-content:center;font-size:32px}
+.fc-cat-name{padding:7px 6px;font-size:12px;font-weight:700;line-height:1.3}
+
+.fc-prods{display:flex;flex-direction:column;gap:8px;padding:12px}
+.fc-prod-row{background:var(--c1);border:1px solid var(--br);border-radius:13px;padding:11px 13px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s}
+.fc-prod-row:hover{border-color:var(--p)}
+.fc-prod-row.unavail{opacity:.4;cursor:not-allowed}
+.fc-prod-row.unavail:hover{border-color:var(--br)}
+.fp-img{width:50px;height:50px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--c2)}
+.fp-img-ph{width:50px;height:50px;border-radius:10px;flex-shrink:0;background:var(--c2);display:flex;align-items:center;justify-content:center;font-size:22px}
+.fp-info{flex:1;min-width:0}
+.fp-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fp-auto{font-size:10px;color:var(--p);margin-top:2px;font-weight:600}
+.fp-price{font-size:15px;font-weight:900;color:var(--p);white-space:nowrap;direction:ltr}
+.fp-unavail{font-size:10px;background:rgba(239,68,68,.12);color:var(--red);border-radius:5px;padding:2px 6px;white-space:nowrap}
+
+/* Buy Modal FastCard Style */
+.fc-buy-modal{text-align:center}
+.fc-buy-img{width:110px;height:110px;border-radius:16px;object-fit:cover;margin:0 auto 12px;display:block;border:2px solid var(--br)}
+.fc-buy-img-ph{width:110px;height:110px;border-radius:16px;background:var(--c2);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.fc-buy-name{font-size:17px;font-weight:900;margin-bottom:8px}
+.fc-buy-price{display:inline-block;background:var(--c2);border:1px solid var(--br);border-radius:9px;padding:5px 16px;font-size:15px;font-weight:700;color:var(--p);margin-bottom:10px;direction:ltr}
+.fc-buy-auto{font-size:12px;color:#f97316;font-weight:700;margin-bottom:14px}
+.fc-buy-field{width:100%;background:var(--c2);border:1px solid var(--br);border-radius:10px;padding:12px;font-size:15px;text-align:center;color:var(--tx);outline:none;margin-bottom:12px;transition:border .2s}
+.fc-buy-field:focus{border-color:var(--p)}
+.fc-buy-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fc-btn-buy{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(22,163,74,.3);transition:all .2s}
+.fc-btn-buy:hover{transform:translateY(-1px)}
+.fc-btn-cancel{background:var(--c2);border:1px solid var(--red);border-radius:11px;padding:13px;font-size:15px;font-weight:700;color:var(--red);cursor:pointer;transition:all .2s}
+.fc-btn-cancel:hover{background:rgba(239,68,68,.08)}
+</style>
+</head>
+<body>
+<div id="ldr" style="display:none"><div class="lr"></div></div>
+<div class="toast" id="toast"></div>
+
+<!-- DEPOSIT MODAL -->
+<div class="ov" id="depOv">
+<div class="modal">
+  <div class="mh"><span class="mt" id="depTtl">💳 شحن الرصيد</span><button class="mx" onclick="closeDep()">✕</button></div>
+  <div class="mb" id="depBody"></div>
+</div>
+</div>
+
+<!-- BUY MODAL -->
+<div class="ov" id="buyOv">
+<div class="modal">
+  <div class="mh"><span class="mt" id="buyTtl">🛒 شراء المنتج</span><button class="mx" onclick="cls('buyOv')">✕</button></div>
+  <div class="mb" id="buyBody"></div>
+</div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="ov" id="loginOv">
+<div class="modal">
+  <div class="mh"><span class="mt">🔐 تسجيل الدخول</span><button class="mx" onclick="cls('loginOv')">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label class="fl">البريد الإلكتروني</label><input class="fi" id="lEm" placeholder="example@email.com" type="email"></div>
+    <div class="fg"><label class="fl">كلمة المرور</label><input class="fi" id="lPw" placeholder="••••••••" type="password"></div>
+    <button class="bp" onclick="doLogin()">دخول</button>
+    <button class="bs" onclick="sw('loginOv','regOv')">إنشاء حساب جديد</button>
+  </div>
+</div>
+</div>
+
+<!-- REGISTER MODAL -->
+<div class="ov" id="regOv">
+<div class="modal">
+  <div class="mh"><span class="mt">📝 إنشاء حساب</span><button class="mx" onclick="cls('regOv')">✕</button></div>
+  <div class="mb">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+      <div class="fg"><label class="fl">الاسم الأول</label><input class="fi" id="rFn" placeholder="محمد"></div>
+      <div class="fg"><label class="fl">الاسم الأخير</label><input class="fi" id="rLn" placeholder="أحمد"></div>
+    </div>
+    <div class="fg"><label class="fl">اسم المستخدم</label><input class="fi" id="rUn" placeholder="username123"></div>
+    <div class="fg"><label class="fl">البريد الإلكتروني</label><input class="fi" id="rEm" placeholder="example@email.com" type="email"></div>
+    <div class="fg"><label class="fl">رقم الهاتف</label><input class="fi" id="rPh" placeholder="09XXXXXXXX" type="tel"></div>
+    <div class="fg"><label class="fl">كلمة المرور</label><input class="fi" id="rPw" placeholder="••••••••" type="password"></div>
+    <button class="bp" onclick="doReg()">إنشاء الحساب</button>
+    <button class="bs" onclick="sw('regOv','loginOv')">لديك حساب؟ سجّل الدخول</button>
+  </div>
+</div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sbo" id="sbo" onclick="cSb()"></div>
+<div class="sb" id="sb">
+  <div class="sbh">
+    <div class="logo" style="flex:unset;font-size:14px"><div class="lic">🎮</div>Game<em>Zone</em></div>
+    <button class="sbx" onclick="cSb()">✕</button>
+  </div>
+  <div class="sb-wcard">
+    <div class="sb-wlbl">رصيد محفظتك</div>
+    <div class="sb-wamt" id="sbBal">0.00</div>
+    <div class="sb-wcur">دولار أمريكي (USD)</div>
+    <button class="sb-wbtn" onclick="cSb();oDep()">💳 شحن الرصيد</button>
+  </div>
+  <nav class="sbn">
+    <a class="on" onclick="nv('home');admClick();return false" id="logoBtn">🏠 الرئيسية</a>
+    <a style="cursor:pointer" onclick="cSb();oDep();return false">💳 شحن الرصيد</a>
+    <a style="cursor:pointer" onclick="cSb();return false">📦 طلباتي</a>
+    <a style="cursor:pointer" onclick="cSb();return false">ℹ️ من نحن</a>
+    <div class="sb-div">الأقسام</div>
+    <a style="cursor:pointer" onclick="oC('games');return false">🎮 الألعاب</a>
+    <a style="cursor:pointer" onclick="oC('chat');return false">💬 تطبيقات التواصل</a>
+    <a style="cursor:pointer" onclick="oC('boost');return false">⚡ الرشق</a>
+    <a style="cursor:pointer" onclick="oC('cards');return false">💳 البطاقات</a>
+    <a style="cursor:pointer" onclick="oC('subs');return false">📺 الاشتراكات</a>
+    <a style="cursor:pointer" onclick="oC('accounts');return false">👤 حسابات جاهزة</a>
+    <a style="cursor:pointer" onclick="oC('design');return false">🎨 تصميم</a>
+    <a style="cursor:pointer" onclick="oC('balance');return false">💰 الرصيد</a>
+  </nav>
+</div>
+
+<!-- TOPBAR -->
+<div class="tb">
+  <a onclick="openWA('https://wa.me/9820982493924')" style="cursor:pointer" class="wp">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="#25d166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    0982493924
+  </a>
+  <div class="tb-r">
+    <a style="cursor:pointer" onclick="return false" class="sico">📸</a>
+    <a style="cursor:pointer" onclick="return false" class="sico">📢</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <button class="hbg" onclick="oSb()"><span></span><span></span><span></span></button>
+  <a class="logo" onclick="nv('home');return false"><div class="lic">🎮</div>Game<em>Zone</em></a>
+  <div class="srchw"><span class="srchi">🔍</span><input type="text" placeholder="ابحث..." oninput="doSrch(this.value)" id="dSrch"></div>
+  <div class="hdr-r">
+    <div class="wbal" onclick="oDep()" title="شحن الرصيد">💰 <span class="wbal-n" id="hBal">0.00$</span></div>
+    <button class="btn-in" id="authBtn" onclick="oOv('loginOv')">🔐 دخول</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+<!-- HOME -->
+<div id="pg-home" class="pg on">
+  <div class="msrch"><input type="text" placeholder="🔍 ابحث عن أي منتج..." oninput="doSrch(this.value)" id="mSrch"></div>
+  <div class="slw">
+    <div class="str" id="str">
+      <div class="sl sl1"><div class="slb" style="width:200px;height:200px;background:var(--p);top:-60px;right:-40px"></div>
+        <div class="slct"><div class="slbdg">⚡ شحن أوتو فوري</div><h1>اشحن رصيدك<br><em>واشتر فوراً</em></h1><p>شام كاش أو سيرياتيل كاش — الرصيد يُضاف لحظياً</p><a class="slbtn" onclick="oDep();return false">💳 شحن الرصيد</a></div>
+      </div>
+      <div class="sl sl2"><div class="slb" style="width:200px;height:200px;background:#ef4444;top:-60px;right:-40px"></div>
+        <div class="slct"><div class="slbdg">🎮 الألعاب</div><h1>PUBG · Free Fire<br><em>COD · Fortnite</em></h1><p>أكثر من 60 لعبة — شحن تلقائي فوري</p><a class="slbtn" onclick="oC('games');return false">🎮 تسوق الآن</a></div>
+      </div>
+      <div class="sl sl3"><div class="slb" style="width:200px;height:200px;background:#3b82f6;top:-60px;right:-40px"></div>
+        <div class="slct"><div class="slbdg">💳 بطاقات</div><h1>iTunes · PlayStation<br><em>Steam · Netflix</em></h1><p>بطاقات رقمية بأسعار منافسة</p><a class="slbtn" onclick="oC('cards');return false">💳 اشتري الآن</a></div>
+      </div>
+    </div>
+    <button class="sla p" onclick="cSl(-1)">›</button><button class="sla n" onclick="cSl(1)">‹</button>
+    <div class="dts"><button class="dt on" onclick="gSl(0)"></button><button class="dt" onclick="gSl(1)"></button><button class="dt" onclick="gSl(2)"></button></div>
+  </div>
+  <div class="hiw">
+    <div class="hiwc"><div class="hiwi">💳</div><div class="hiwt">١ — اشحن</div><div class="hiws">شام كاش أو سيرياتيل كاش</div></div>
+    <div class="hiwc"><div class="hiwi">🛒</div><div class="hiwt">٢ — اختر</div><div class="hiws">المنتج والكمية</div></div>
+    <div class="hiwc"><div class="hiwi">⚡</div><div class="hiwt">٣ — استلم</div><div class="hiws">تلقائياً وفورياً</div></div>
+  </div>
+  <div class="promo"><span>❤️</span><span>أسعار خاصة للتجار — تواصل على واتساب للخصم</span><a onclick="openWA('https://wa.me/9820982493924')" style="cursor:pointer" class="pc">تواصل</a></div>
+  <div class="sts">
+    <div class="st"><div class="stn">+50K</div><div class="stl">عميل</div></div>
+    <div class="st"><div class="stn">+400</div><div class="stl">منتج</div></div>
+    <div class="st"><div class="stn">24/7</div><div class="stl">دعم</div></div>
+    <div class="st"><div class="stn">⚡</div><div class="stl">أوتو</div></div>
+  </div>
+  <div class="sec">
+    <div class="sect">الأقسام</div>
+    <div class="cg">
+      <a class="cc" onclick="oC('games');return false"><span class="ci">🎮</span><div class="cn">الألعاب</div><div class="cct">+60 لعبة</div></a>
+      <a class="cc" onclick="oC('chat');return false"><span class="ci">💬</span><div class="cn">تطبيقات التواصل</div><div class="cct">+170</div></a>
+      <a class="cc" onclick="oC('boost');return false"><span class="ci">⚡</span><div class="cn">الرشق</div><div class="cct">5 منصات</div></a>
+      <a class="cc" onclick="oC('cards');return false"><span class="ci">💳</span><div class="cn">البطاقات</div><div class="cct">11 نوع</div></a>
+      <a class="cc" onclick="oC('subs');return false"><span class="ci">📺</span><div class="cn">اشتراكات</div><div class="cct">17</div></a>
+      <a class="cc" onclick="oC('accounts');return false"><span class="ci">👤</span><div class="cn">حسابات جاهزة</div><div class="cct">11 نوع</div></a>
+      <a class="cc" onclick="oC('design');return false"><span class="ci">🎨</span><div class="cn">تصميم</div><div class="cct">3 برامج</div></a>
+      <a class="cc" onclick="oC('balance');return false"><span class="ci">💰</span><div class="cn">الرصيد</div><div class="cct">+25</div></a>
+      <a class="cc" onclick="oC('numbers');return false"><span class="ci">📱</span><div class="cn">الأرقام</div><div class="cct">3 أقسام</div></a>
+      <a class="cc" onclick="oC('verify');return false"><span class="ci">✅</span><div class="cn">توثيق</div><div class="cct">متاح</div></a>
+      <a class="cc" onclick="oC('proxy');return false"><span class="ci">🌐</span><div class="cn">بروكسيات</div><div class="cct">متاح</div></a>
+      <a class="cc" onclick="oC('software');return false"><span class="ci">💻</span><div class="cn">السوفتوير</div><div class="cct">متاح</div></a>
+    </div>
+  </div>
+  <div class="cta">
+    <h2>⚡ شحن فوري أوتوماتيك 24/7</h2>
+    <p>اشحن رصيدك واستلم منتجك تلقائياً بدون انتظار</p>
+    <a style="cursor:pointer" onclick="return false" class="wabig">📢 قناة العروض</a>
+  </div>
+</div>
+
+<!-- CAT -->
+<div id="pg-cat" class="pg">
+  <div class="pgb"><button class="bk" onclick="gB()">← رجوع</button><span class="pgbt" id="cTtl"></span><span class="pgbc" id="cCnt"></span></div>
+  <div class="brd" id="brd1"></div>
+  <div class="pg2" id="pGrid"></div>
+</div>
+
+<!-- SUBS -->
+<div id="pg-subs" class="pg">
+  <div class="pgb"><button class="bk" onclick="gB()">← رجوع</button><span class="pgbt" id="sTtl"></span></div>
+  <div class="brd" id="brd2"></div>
+  <div class="slist" id="sList"></div>
+</div>
+
+<!-- PKGS -->
+<div id="pg-pkgs" class="pg">
+  <div class="pgb"><button class="bk" onclick="gB()">← رjouع</button><span class="pgbt" id="pkTtl"></span></div>
+  <div class="brd" id="brd3"></div>
+  <div class="slist" id="pkList"></div>
+</div>
+
+<!-- SEARCH -->
+<div id="pg-srch" class="pg">
+  <div class="pgb"><button class="bk" onclick="nv('home')">← رجوع</button><span class="pgbt">نتائج: "<span id="srchQ"></span>"</span><span class="pgbc" id="srchC"></span></div>
+  <div class="pg2" id="srchG"></div>
+</div>
+
+</main>
+
+<footer>
+  <div class="fin">
+    <div class="fb">GameZone 🎮</div>
+    <div class="fls"><a style="cursor:pointer" onclick="nv('home');return false">الرئيسية</a><a style="cursor:pointer" onclick="return false">من نحن</a><a style="cursor:pointer" onclick="return false">سياسة الاسترجاع</a></div>
+    <div class="fso">
+      <a onclick="openWA('https://wa.me/9820982493924')" style="cursor:pointer" class="fsi">📱</a>
+      <a style="cursor:pointer" onclick="return false" class="fsi">📸</a>
+      <a style="cursor:pointer" onclick="return false" class="fsi">📢</a>
+    </div>
+  </div>
+  <div class="fcp">© 2025 جميع الحقوق محفوظة لـ <a style="cursor:pointer">GameZone 🛍️</a>
+  <span style="margin:0 8px;color:var(--br)">|</span>
+  <a onclick="openAdmin();return false" style="color:var(--mu);font-size:10px">⚙️ إدارة</a>
+</div>
+</footer>
+
+
+
+<!-- ADMIN BUTTON (hidden, triple-click logo) -->
+<div id="adminOv" class="ov">
+<div class="modal" style="max-width:460px">
+  <div class="mh"><span class="mt" id="adminTtl">⚙️ الإدارة</span><button class="mx" onclick="cls('adminOv')">✕</button></div>
+  <div class="mb" id="adminBody"></div>
+</div>
+</div>
+
+<style>
+/* ADMIN STYLES */
+.adm-tab{flex:1;background:none;border:none;color:var(--mu);font-size:11px;font-weight:700;padding:7px 4px;border-radius:7px;transition:all .2s}
+.adm-tab.on{background:var(--p);color:#fff}
+.adm-section{font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;padding:10px 0 6px;border-bottom:1px solid var(--br);margin-bottom:10px}
+.adm-stat-card{background:var(--c2);border:1px solid var(--br);border-radius:10px;padding:12px;text-align:center}
+.adm-stat-n{font-size:18px;font-weight:900;color:var(--p)}
+.adm-stat-l{font-size:10px;color:var(--mu);margin-top:2px}
+/* poll box */
+.poll-box{background:var(--c2);border:1px solid var(--br);border-radius:12px;padding:16px;text-align:center;margin-bottom:12px}
+.poll-ic{font-size:32px;margin-bottom:8px}
+.poll-t{font-size:14px;font-weight:800;margin-bottom:5px}
+.poll-s{font-size:12px;color:var(--mu);line-height:1.6;margin-bottom:12px}
+.poll-dots{display:flex;justify-content:center;gap:6px;margin-bottom:8px}
+.poll-dot{width:8px;height:8px;border-radius:50%;background:var(--p);animation:bounce 1.2s ease infinite}
+.poll-dot:nth-child(2){animation-delay:.2s}
+.poll-dot:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+.poll-timer{font-size:22px;font-weight:900;color:var(--p);font-variant-numeric:tabular-nums}
+.poll-sub{font-size:10px;color:var(--mu);margin-top:3px}
+</style>
+<script>
+// ============================================================
+// GAMEZONE — FastCard API Integration
+// Base: https://fastcard1.store/client/api/
+// Token: stored securely, injected per-request
+// ============================================================
+
+const API_BASE  = 'https://game-hub-production-062a.up.railway.app/api/fc';
+const API_TOKEN = ''; // Token handled securely on server
+const PROFIT_MARGIN = 0.15; // 15% هامش ربح افتراضي — قابل للتعديل من الأدمن
+
+// ─── API HELPERS ───────────────────────────────────────────
+async function apiGet(path) {
+  const res = await fetch(API_BASE + path);
+  if (!res.ok) throw new Error('API Error ' + res.status);
+  return res.json();
+}
+
+async function apiPost(path, params = {}) {
+  const match = path.match(/\/newOrder\/(\d+)/);
+  const productId = match ? match[1] : null;
+  const body = productId ? { productId, ...params } : params;
+  const res = await fetch(API_BASE + '/order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error('API Error ' + res.status);
+  return res.json();
+}
+
+// ─── PRODUCTS CACHE ────────────────────────────────────────
+let apiProducts  = [];
+let apiCategories = [];
+let apiLoaded    = false;
+let apiBalance   = 0;
+
+// ─── LOAD ALL PRODUCTS FROM FASTCARD ───────────────────────
+async function loadAPIProducts() {
+  try {
+    showApiLoader();
+    // Fetch products + balance in parallel
+    const [productsData, profileData] = await Promise.all([
+      apiGet('/products'),
+      apiGet('/profile')
+    ]);
+
+    apiProducts = productsData.filter(p => p.available);
+    apiBalance = window.apiBalance = parseFloat(profileData.balance || 0);
+    apiLoaded = true; window.apiLoaded = true;
+
+    // Group by category
+    const catMap = {};
+    apiProducts.forEach(p => {
+      const cat = p.category_name || 'أخرى';
+      if (!catMap[cat]) catMap[cat] = [];
+      // Apply profit margin to price
+      p.sellPrice = p.sell_price || parseFloat((p.price * (1 + (adminSettings?.profit || PROFIT_MARGIN * 100) / 100)).toFixed(3));
+      catMap[cat].push(p);
+    });
+    apiCategories = Object.entries(catMap).map(([name, items]) => ({ name, items }));
+
+    hideApiLoader();
+    renderAPIHome();
+    toast('✅ تم تحميل ' + apiProducts.length + ' منتج من FastCard', 'ok');
+  } catch (e) {
+    hideApiLoader();
+    toast('⚠️ تعذر الاتصال بـ FastCard — عرض المنتجات المحلية', 'er');
+    apiLoaded = false;
+  }
+}
+
+// ─── RENDER API HOME ───────────────────────────────────────
+function renderAPIHome() {
+  if (!apiLoaded || !apiCategories.length) return;
+  const homeGrid = document.querySelector('.cg');
+  if (!homeGrid) return;
+
+  homeGrid.innerHTML = apiCategories.map(cat => {
+    const img = cat.items[0]?.category_image || cat.items[0]?.cat_image || '';
+    const ic = getCatIcon(cat.name);
+    return `<div class="fc-cat-card" onclick="openAPICategory('${encodeURIComponent(cat.name)}')">
+      ${img
+        ? `<img class="fc-cat-img" src="${img}" alt="${cat.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="fc-cat-img-ph" style="display:none">${ic}</div>`
+        : `<div class="fc-cat-img-ph">${ic}</div>`}
+      <div class="fc-cat-name">${cat.name}</div>
+    </div>`;
+  }).join('');
+
+  // Override .cg grid style to 3 cols
+  homeGrid.style.display = 'grid';
+  homeGrid.style.gridTemplateColumns = 'repeat(3,1fr)';
+  homeGrid.style.gap = '10px';
+
+  const statEls = document.querySelectorAll('.stn');
+  if (statEls[1]) statEls[1].textContent = '+' + apiProducts.length;
+}
+
+function getCatIcon(name) {
+  const icons = {
+    'PUBG': '🎯', 'Free Fire': '🔥', 'pubg': '🎯', 'فري فاير': '🔥',
+    'Call of Duty': '🎖️', 'COD': '🎖️', 'Fortnite': '🏗️',
+    'Mobile Legends': '🗡️', 'Valorant': '⚔️', 'Genshin': '✨',
+    'iTunes': '🍎', 'PlayStation': '🎮', 'Steam': '🎯',
+    'Netflix': '🎬', 'Spotify': '🎵', 'Xbox': '🟢',
+    'Roblox': '🧱', 'TikTok': '🎵', 'Bigo': '🔴',
+    'Google Play': '▶️', 'Amazon': '📦', 'شحن': '⚡',
+  };
+  for (const [key, icon] of Object.entries(icons)) {
+    if (name.toLowerCase().includes(key.toLowerCase())) return icon;
+  }
+  return '🎮';
+}
+
+// ─── OPEN API CATEGORY ─────────────────────────────────────
+function openAPICategory(catNameEncoded) {
+  const catName = decodeURIComponent(catNameEncoded);
+  const cat = apiCategories.find(c => c.name === catName);
+  if (!cat) return;
+
+  // Check if items are sub-categories (have children) or final products
+  // FastCard style: show as grid cards if they have images (sub-cats), else list (products)
+  const hasSubCats = cat.items.some(p => p.children && p.children.length > 0);
+  const hasImages = cat.items.some(p => p.image || p.img);
+
+  document.getElementById('cTtl').textContent = getCatIcon(catName) + ' ' + catName;
+  document.getElementById('cCnt').textContent = cat.items.length + ' منتج';
+  document.getElementById('brd1').innerHTML = `<a onclick="nv('home')" style="cursor:pointer">🏠 الرئيسية</a> › <span>${catName}</span>`;
+
+  const grid = document.getElementById('pGrid');
+  grid.style.padding = '0';
+  grid.className = '';
+
+  if (hasImages) {
+    // Show as grid cards (like FastCard games page)
+    grid.innerHTML = `<div class="fc-cats">${cat.items.map(p => {
+      const img = p.image || p.img || '';
+      const ic = getCatIcon(p.name || p.category_name);
+      return `<div class="fc-cat-card" onclick="openAPIProduct(${p.id})">
+        ${img
+          ? `<img class="fc-cat-img" src="${img}" alt="${p.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="fc-cat-img-ph" style="display:none">${ic}</div>`
+          : `<div class="fc-cat-img-ph">${ic}</div>`}
+        <div class="fc-cat-name">${p.name}</div>
+      </div>`;
+    }).join('')}</div>`;
+  } else {
+    // Show as list (like FastCard products page — UC amounts etc.)
+    grid.innerHTML = `<div class="fc-prods">${cat.items.map(p => {
+      const priceSYP = Math.round((p.sell_price || p.sellPrice || p.price) * RATE);
+      const img = p.image || p.img || '';
+      const unavail = !p.available;
+      const ic = getCatIcon(p.category_name || catName);
+      return `<div class="fc-prod-row${unavail?' unavail':''}" onclick="${unavail?'void(0)':('openAPIProduct('+p.id+')')}">
+        ${img ? `<img class="fp-img" src="${img}" alt="${p.name}" onerror="this.outerHTML='<div class=fp-img-ph>${ic}</div>'">` : `<div class="fp-img-ph">${ic}</div>`}
+        <div class="fp-info">
+          <div class="fp-name">${p.name}</div>
+          ${p.auto ? '<div class="fp-auto">⚡ أوتوماتيك 24 ساعة</div>' : ''}
+        </div>
+        ${unavail
+          ? `<div class="fp-unavail">غير متوفر</div>`
+          : `<div class="fp-price">${priceSYP.toLocaleString()} ل.س</div>`}
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  nv('cat');
+}
+
+// ─── OPEN API PRODUCT (buy modal) ──────────────────────────
+function openAPIProduct(productId) {
+  const p = apiProducts.find(x => x.id === productId);
+  if (!p) return;
+
+  const priceSYP = Math.round((p.sell_price || p.sellPrice || p.price) * RATE);
+  const img = p.image || p.img || '';
+  const params = p.params || [];
+  const price = p.sell_price || p.sellPrice || p.price;
+  const ok = wallet >= price;
+  const ic = getCatIcon(p.category_name);
+
+  document.getElementById('buyTtl').textContent = p.name;
+  document.getElementById('buyBody').innerHTML = `
+    <div class="fc-buy-modal">
+      ${img
+        ? `<img class="fc-buy-img" src="${img}" alt="${p.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="fc-buy-img-ph" style="display:none">${ic}</div>`
+        : `<div class="fc-buy-img-ph">${ic}</div>`}
+      <div class="fc-buy-name">${p.name}</div>
+      <div class="fc-buy-price">${priceSYP.toLocaleString()} ل.س</div>
+      ${p.auto ? '<div class="fc-buy-auto">⚡ هذه الخدمة تعمل بشكل اوتوماتيكي على مدار 24 ساعة</div>' : ''}
+    </div>
+    ${params.length
+      ? params.map((param, i) => `<input class="fc-buy-field" id="apiParam_${i}" placeholder="${param}">`)
+        .join('')
+      : `<input class="fc-buy-field" id="apiParam_0" placeholder="ايدي اللاعب">`}
+    ${!ok
+      ? `<div class="rb" style="margin-bottom:12px">⚠️ رصيدك غير كافٍ — اشحن <strong>${Math.round((price-wallet)*RATE).toLocaleString()} ل.س</strong> إضافية</div>`
+      : ''}
+    <div class="fc-buy-btns">
+      ${ok
+        ? `<button class="fc-btn-buy" onclick="apiFCBuy(${p.id})">شراء</button>`
+        : `<button class="fc-btn-buy" style="background:linear-gradient(135deg,#25d166,#128c4e)" onclick="cls('buyOv');oDep()">💳 شحن الرصيد</button>`}
+      <button class="fc-btn-cancel" onclick="cls('buyOv')">إلغاء</button>
+    </div>
+  `;
+  oOv('buyOv');
+}
+
+async function apiFCBuy(pid) {
+  const p = apiProducts.find(x => x.id === pid);
+  if (!p) return;
+
+  const params = p.params || ['ايدي اللاعب'];
+  const paramVals = {};
+  for (let i = 0; i < params.length; i++) {
+    const val = document.getElementById('apiParam_' + i)?.value?.trim();
+    if (!val) { toast('أدخل: ' + params[i], 'er'); return; }
+    paramVals[params[i]] = val;
+  }
+  if (!Object.keys(paramVals).length) {
+    const v = document.getElementById('apiParam_0')?.value?.trim();
+    if (!v) { toast('أدخل ايدي اللاعب', 'er'); return; }
+    paramVals['playerId'] = v;
+  }
+
+  const price = p.sell_price || p.sellPrice || p.price;
+  if (wallet < price) { toast('رصيدك غير كافٍ', 'er'); return; }
+
+  // Show processing
+  document.getElementById('buyBody').innerHTML = `
+    <div style="text-align:center;padding:30px 0">
+      <div style="font-size:50px;margin-bottom:14px;animation:spin 1.5s linear infinite">⚡</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:6px">جاري تنفيذ الطلب...</div>
+      <div style="font-size:12px;color:var(--mu)">يتم الشحن تلقائياً</div>
+    </div>
+  `;
+
+  try {
+    const uuid = Math.random().toString(36).slice(2,10).toUpperCase();
+    const body = { productId: pid, qty: 1, order_uuid: uuid, ...paramVals };
+    const res = await fetch(API_BASE + '/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const result = await res.json();
+
+    if (result.status === 'OK') {
+      wallet -= price;
+      if (wallet < 0) wallet = 0;
+      updateBal();
+
+      const orders = JSON.parse(localStorage.getItem('fcOrders') || '[]');
+      orders.push({ id: result.data?.order_id || uuid, name: p.name, total: price, time: new Date().toLocaleString('ar-SY'), status: result.data?.status || 'processing' });
+      localStorage.setItem('fcOrders', JSON.stringify(orders));
+
+      const priceSYP = Math.round(price * RATE);
+      document.getElementById('buyTtl').textContent = '✅ تم الشحن!';
+      document.getElementById('buyBody').innerHTML = `
+        <div style="text-align:center;padding:10px 0">
+          <div style="font-size:58px;margin-bottom:12px;animation:pop .5s ease">🎉</div>
+          <div style="font-size:18px;font-weight:900;color:var(--grn);margin-bottom:6px">تم الشحن بنجاح!</div>
+          <div style="font-size:13px;color:var(--mu);margin-bottom:14px">${p.name}</div>
+          <div class="osum">
+            <div class="or"><span>رقم الطلب</span><span style="color:var(--p);font-weight:700">${result.data?.order_id || uuid}</span></div>
+            <div class="or"><span>المبلغ المخصوم</span><span style="font-weight:900">${priceSYP.toLocaleString()} ل.س</span></div>
+            <div class="or"><span>رصيدك المتبقي</span><span style="font-weight:900">${Math.round(wallet * RATE).toLocaleString()} ل.س</span></div>
+          </div>
+          <button class="bp" onclick="cls('buyOv')">تم ✅</button>
+        </div>
+      `;
+    } else {
+      document.getElementById('buyBody').innerHTML = `
+        <div style="text-align:center;padding:20px 0">
+          <div style="font-size:48px;margin-bottom:12px">❌</div>
+          <div style="font-size:16px;font-weight:700;color:var(--red);margin-bottom:8px">فشل تنفيذ الطلب</div>
+          <div style="font-size:12px;color:var(--mu);margin-bottom:16px">${result.error || 'خطأ غير معروف'}</div>
+          <button class="bp" onclick="openAPIProduct(${pid})">🔄 حاول مجدداً</button>
+        </div>
+      `;
+    }
+  } catch(e) {
+    document.getElementById('buyBody').innerHTML = `
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:48px;margin-bottom:12px">❌</div>
+        <div style="font-size:16px;font-weight:700;color:var(--red);margin-bottom:8px">خطأ في الاتصال</div>
+        <button class="bp" onclick="openAPIProduct(${pid})">🔄 حاول مجدداً</button>
+      </div>
+    `;
+  }
+}
+
+let apiQty = 1;
+function apiChgQty(pid, dir, minQ, maxQ) {
+  apiQty = Math.max(minQ, Math.min(maxQ, apiQty + dir));
+  const p = apiProducts.find(x => x.id === pid);
+  if (!p) return;
+  document.getElementById('apiQtyV').textContent = apiQty;
+  document.getElementById('apiQtyT').textContent = '$' + (p.sellPrice * apiQty).toFixed(2);
+}
+
+function apiNextStep(pid) {
+  const p = apiProducts.find(x => x.id === pid);
+  if (!p) return;
+
+  const params = p.params || [];
+  document.getElementById('buyBody').innerHTML = `
+    <div class="stbar">
+      <div class="sth dn">✓ الكمية</div>
+      <div class="sth cur">٢ البيانات</div>
+      <div class="sth">٣ التنفيذ</div>
+    </div>
+    <div class="osum">
+      <div class="or tot"><span>${p.name} × ${apiQty}</span><span>$${(p.sellPrice * apiQty).toFixed(2)}</span></div>
+    </div>
+    ${params.map((param, i) => `
+      <div class="field-box" style="background:var(--c2);border:1px solid var(--br);border-radius:10px;padding:13px;margin-bottom:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--mu);margin-bottom:8px">${param} <span style="color:var(--red)">*</span></div>
+        <input class="fi" id="apiParam_${i}" placeholder="${param}" style="background:var(--bg)">
+      </div>
+    `).join('')}
+    <div class="wb">⚠️ تأكد من صحة البيانات — الطلب يُنفَّذ فوراً ولا يمكن إلغاؤه</div>
+    <button class="bp" onclick="apiConfirmOrder(${pid})">⚡ تأكيد وتنفيذ الطلب فوراً</button>
+    <button class="bs" onclick="openAPIProduct(${pid})">← رجوع</button>
+  `;
+}
+
+// ─── CONFIRM & EXECUTE ORDER ───────────────────────────────
+async function apiConfirmOrder(pid) {
+  const p = apiProducts.find(x => x.id === pid);
+  if (!p) return;
+
+  // Collect params
+  const params = p.params || [];
+  const paramVals = {};
+  for (let i = 0; i < params.length; i++) {
+    const val = document.getElementById('apiParam_' + i)?.value?.trim();
+    if (!val) { toast('أدخل: ' + params[i], 'er'); return; }
+    // Map param name to API key
+    const key = params[i].toLowerCase().includes('player') || params[i].toLowerCase().includes('id')
+      ? 'playerId' : params[i].replace(/\s+/g, '_').toLowerCase();
+    paramVals[key] = val;
+  }
+
+  const total = p.price * apiQty; // cost price from FastCard
+  const totalSell = p.sellPrice * apiQty;
+
+  // Check our wallet
+  if (wallet < totalSell) { toast('رصيدك غير كافٍ', 'er'); return; }
+
+  // Show processing
+  document.getElementById('buyTtl').textContent = '⚡ جاري التنفيذ...';
+  document.getElementById('buyBody').innerHTML = `
+    <div class="stbar">
+      <div class="sth dn">✓ الكمية</div>
+      <div class="sth dn">✓ البيانات</div>
+      <div class="sth cur">٣ التنفيذ</div>
+    </div>
+    <div class="pbar"><div class="pfill" id="apipf" style="width:0%"></div></div>
+    <div style="text-align:center;padding:24px 0">
+      <div style="font-size:48px;margin-bottom:12px;animation:spin 1.5s linear infinite">⚡</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:6px">جاري إرسال الطلب لـ FastCard...</div>
+      <div style="font-size:12px;color:var(--mu)" id="apiMsg">يتم التحقق من الرصيد...</div>
+    </div>
+  `;
+
+  // Animate progress
+  const msgs = ['يتم التحقق من الرصيد...', 'جاري إرسال الطلب لـ FastCard...', 'تم استلام الطلب...', 'جاري التنفيذ...'];
+  let step = 0;
+  const iv = setInterval(() => {
+    step++;
+    const pf = document.getElementById('apipf');
+    const mg = document.getElementById('apiMsg');
+    if (pf) pf.style.width = (step * 20) + '%';
+    if (mg) mg.textContent = msgs[Math.min(step-1, msgs.length-1)];
+    if (step >= 4) clearInterval(iv);
+  }, 600);
+
+  try {
+    // Generate unique order UUID
+    const orderUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+      const r = Math.random() * 16 | 0;
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+
+    // Build API params
+    const orderParams = {
+      qty: apiQty,
+      order_uuid: orderUUID,
+      ...paramVals
+    };
+
+    // Call FastCard API
+    const result = await apiPost('/newOrder/' + pid + '/params', orderParams);
+
+    clearInterval(iv);
+
+    if (result.status === 'OK') {
+      // Deduct from wallet
+      wallet -= totalSell;
+      if (wallet < 0) wallet = 0;
+      updateBal();
+
+      // Save order to history
+      const orders = JSON.parse(localStorage.getItem('fcOrders') || '[]');
+      orders.push({
+        id: result.data?.order_id || orderUUID,
+        name: p.name,
+        qty: apiQty,
+        total: totalSell,
+        costPrice: total,
+        params: paramVals,
+        status: result.data?.status || 'processing',
+        time: new Date().toLocaleString('ar-SY'),
+        apiOrderId: result.data?.order_id,
+        replay: result.data?.replay_api || []
+      });
+      localStorage.setItem('fcOrders', JSON.stringify(orders));
+
+      // Show success
+      renderAPISuccess(p, result, paramVals, totalSell, orderUUID);
+
+    } else {
+      clearInterval(iv);
+      renderAPIError(result.error || 'خطأ في تنفيذ الطلب', pid);
+    }
+
+  } catch (e) {
+    clearInterval(iv);
+    renderAPIError('تعذر الاتصال بـ FastCard: ' + e.message, pid);
+  }
+}
+
+function renderAPISuccess(p, result, params, total, uuid) {
+  const orderId = result.data?.order_id || uuid;
+  const status  = result.data?.status || 'processing';
+  const replay  = result.data?.replay_api || [];
+  const pf = document.getElementById('apipf');
+  if (pf) pf.style.width = '100%';
+
+  document.getElementById('buyTtl').textContent = '✅ تم الطلب!';
+  document.getElementById('buyBody').innerHTML = `
+    <div class="sucbox">
+      <div class="suci">🎉</div>
+      <div class="suct" style="color:var(--grn)">تم تنفيذ الطلب!</div>
+      <div class="sucm">
+        تم إرسال طلب <strong style="color:var(--p)">${p.name}</strong><br>
+        إلى FastCard وبدأ التنفيذ فوراً ⚡
+      </div>
+      <div class="sucid">رقم الطلب: ${orderId}</div>
+      <div class="osum">
+        <div class="or"><span>الحالة</span><span style="color:${status==='accept'?'var(--grn)':'#fdba74'};font-weight:700">
+          ${status === 'accept' ? '✅ مقبول' : status === 'processing' ? '⏳ قيد التنفيذ' : status}
+        </span></div>
+        <div class="or"><span>المبلغ المخصوم</span><span style="font-weight:900;color:var(--p)">$${total.toFixed(2)}</span></div>
+        ${replay.length ? `<div class="or"><span>الكود</span><span style="direction:ltr;font-weight:700;color:var(--grn)">${replay.join(', ')}</span></div>` : ''}
+        <div class="or"><span>رصيدك المتبقي</span><span style="font-weight:900">$${wallet.toFixed(2)}</span></div>
+      </div>
+      ${status === 'processing' ? `
+        <div class="wb">⏳ الطلب قيد التنفيذ — سيتم الإشعار عند الاكتمال</div>
+        <button class="bs" onclick="checkAPIOrder('${orderId}')">🔄 تحقق من الحالة</button>
+      ` : ''}
+      <button class="bp" onclick="cls('buyOv');nv('home')">🏠 الرئيسية</button>
+      <button class="bs" onclick="cls('buyOv')">🛒 مزيد من التسوق</button>
+    </div>
+  `;
+}
+
+function renderAPIError(msg, pid) {
+  document.getElementById('buyTtl').textContent = '❌ خطأ';
+  document.getElementById('buyBody').innerHTML = `
+    <div class="sucbox">
+      <div class="suci">❌</div>
+      <div class="suct" style="color:var(--red)">فشل تنفيذ الطلب</div>
+      <div class="sucm">${msg}</div>
+      <button class="bp" onclick="openAPIProduct(${pid})">🔄 حاول مجدداً</button>
+      <button class="bs" onclick="cls('buyOv')">إلغاء</button>
+    </div>
+  `;
+}
+
+// ─── CHECK ORDER STATUS ────────────────────────────────────
+async function checkAPIOrder(orderId) {
+  try {
+    toast('جاري التحقق...', 'in');
+    const data = await apiGet('/check?orderId=' + orderId);
+    if (data.status === 'OK' && data.data?.length) {
+      const order = data.data[0];
+      const statusText = order.status === 'accept' ? '✅ مكتمل' :
+                        order.status === 'processing' ? '⏳ قيد التنفيذ' :
+                        order.status === 'cancel' ? '❌ ملغي' : order.status;
+      toast('حالة الطلب: ' + statusText, order.status === 'accept' ? 'ok' : 'in');
+
+      // Update order in history
+      const orders = JSON.parse(localStorage.getItem('fcOrders') || '[]');
+      const idx = orders.findIndex(o => o.id === orderId || o.apiOrderId === orderId);
+      if (idx !== -1) {
+        orders[idx].status = order.status;
+        orders[idx].replay = order.replay_api || [];
+        localStorage.setItem('fcOrders', JSON.stringify(orders));
+      }
+    }
+  } catch(e) {
+    toast('تعذر التحقق', 'er');
+  }
+}
+
+// ─── API LOADER UI ─────────────────────────────────────────
+function showApiLoader() {
+  const main = document.querySelector('main');
+  if (!main) return;
+  let ldr = document.getElementById('apiLdr');
+  if (!ldr) {
+    ldr = document.createElement('div');
+    ldr.id = 'apiLdr';
+    ldr.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--c1);border:1px solid var(--p);border-radius:11px;padding:10px 18px;font-size:12px;font-weight:700;color:var(--p);z-index:500;display:flex;align-items:center;gap:8px';
+    ldr.innerHTML = '<div class="lr" style="width:16px;height:16px;border-width:2px"></div> جاري تحميل المنتجات من FastCard...';
+    document.body.appendChild(ldr);
+  }
+}
+
+function hideApiLoader() {
+  const ldr = document.getElementById('apiLdr');
+  if (ldr) ldr.remove();
+}
+
+// ─── API SEARCH ────────────────────────────────────────────
+window.doSrchAPI = function doSrchAPI(q) {
+  if (!apiLoaded || !q || q.length < 2) return false;
+  const results = apiProducts.filter(p =>
+    p.name.toLowerCase().includes(q.toLowerCase()) ||
+    p.category_name.toLowerCase().includes(q.toLowerCase())
+  );
+  if (!results.length) return false;
+
+  document.getElementById('srchQ').textContent = q;
+  document.getElementById('srchC').textContent = results.length + ' نتيجة';
+  document.getElementById('srchG').innerHTML = results.slice(0,40).map(p => `
+    <div class="pcard" onclick="openAPIProduct(${p.id})">
+      <div class="pcai">${getCatIcon(p.category_name)}</div>
+      <div class="pcan">${p.name}</div>
+      <div class="pcas">${p.category_name}</div>
+      <div class="pcaa" style="color:var(--p);font-weight:900">$${p.sellPrice.toFixed(2)}</div>
+    </div>`).join('');
+  nv('srch');
+  return true;
+}
+
+// ─── OVERRIDE doSrch TO USE API ────────────────────────────
+// search override placeholder
+
+
+// ─── EXPOSE GLOBALS ────────────────────────────────────────
+window.loadAPIProducts    = loadAPIProducts;
+window.openAPICategory    = openAPICategory;
+window.openAPIProduct     = openAPIProduct;
+window.apiFCBuy = apiFCBuy;
+window.apiChgQty          = apiChgQty;
+window.apiNextStep        = apiNextStep;
+window.apiConfirmOrder    = apiConfirmOrder;
+window.checkAPIOrder      = checkAPIOrder;
+window.renderAPIBuyStep1  = renderAPIBuyStep1;
+
+// ─── AUTO-LOAD ON INIT ─────────────────────────────────────
+// auto-init override
+
+
+// Admin: show API balance
+// admin dash override
+
+
+
+
+// ============================================================
+// GameZone — Main Application JS
+// SyrCash auto-deposit integrated via /api/deposit/check-syr
+// ============================================================
+
+// ---- CONSTANTS ----
+const RATE = 13000; // SYP per USD
+const SYR_NUM = "0982493924";
+const SHAM_NUM = "0982493924";
+const POLL_INTERVAL_MS = 12000; // check every 12 seconds
+const POLL_MAX_ATTEMPTS = 25;   // ~5 minutes total
+const SYR_AMOUNTS_SYP = [10000, 25000, 50000, 75000, 100000, 150000, 200000, 500000];
+
+// ---- STATE ----
+let wallet = parseFloat(localStorage.getItem("fcWallet") || "0");
+let user = JSON.parse(
+  localStorage.getItem("fcUser") || "null"
+);
+let slideIdx = 0;
+let slideTimer = null;
+let depMethod = "";
+let depAmt = 0;
+let pollTimer = null;
+let pollCount = 0;
+let depInitTs = 0;
+
+// ---- UTILS ----
+function $(id) {
+  return document.getElementById(id);
+}
+
+function toast(msg, type = "in", dur = 3000) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.className = "toast on " + type;
+  setTimeout(() => {
+    t.className = "toast";
+  }, dur);
+}
+
+function cls(id) {
+  $(id).classList.remove("on");
+}
+
+function oOv(id) {
+  $(id).classList.add("on");
+}
+
+function sw(from, to) {
+  cls(from);
+  setTimeout(() => oOv(to), 200);
+}
+
+function updateBal() {
+  const s = wallet.toFixed(2) + "$";
+  const el = $("hBal");
+  const sb = $("sbBal");
+  if (el) el.textContent = s;
+  if (sb) sb.textContent = wallet.toFixed(2);
+  localStorage.setItem("fcWallet", String(wallet));
+}
+
+function updateAuth() {
+  const btn = $("authBtn");
+  if (!btn) return;
+  if (user) {
+    btn.textContent = "👤 " + user.name.split(" ")[0];
+    btn.onclick = () => oOv("loginOv");
+  } else {
+    btn.textContent = "🔐 دخول";
+    btn.onclick = () => oOv("loginOv");
+  }
+}
+
+// ---- PAGES ----
+function nv(page) {
+  document.querySelectorAll(".pg").forEach((p) => p.classList.remove("on"));
+  const el = $("pg-" + page);
+  if (el) el.classList.add("on");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  cls("sbo");
+  $("sb").classList.remove("on");
+}
+
+function gB() {
+  nv("home");
+}
+
+// ---- SIDEBAR ----
+function oSb() {
+  $("sbo").classList.add("on");
+  $("sb").classList.add("on");
+}
+
+function cSb() {
+  $("sbo").classList.remove("on");
+  $("sb").classList.remove("on");
+}
+
+// ---- SLIDER ----
+function rSlide() {
+  const strip = $("str");
+  if (!strip) return;
+  (strip).style.transform = `translateX(${slideIdx * 100}%)`;
+  document.querySelectorAll(".dt").forEach((d, i) => {
+    d.classList.toggle("on", i === slideIdx);
+  });
+}
+
+function cSl(dir) {
+  slideIdx = (slideIdx + dir + 3) % 3;
+  rSlide();
+}
+
+function gSl(i) {
+  slideIdx = i;
+  rSlide();
+}
+
+function startSlider() {
+  slideTimer = setInterval(() => cSl(-1), 4500);
+}
+
+// ---- CATEGORIES ----
+const CATS = {
+  games: {
+    icon: "🎮", name: "الألعاب",
+    items: [
+      { icon: "🔫", name: "PUBG Mobile", price: 1.5, desc: "UC للعبة PUBG" },
+      { icon: "🔥", name: "Free Fire", price: 1, desc: "جواهر Free Fire" },
+      { icon: "⚔️", name: "Call of Duty", price: 2, desc: "CP للعبة COD" },
+      { icon: "🏗️", name: "Fortnite", price: 2.5, desc: "V-Bucks" },
+      { icon: "🎯", name: "Clash of Clans", price: 1.5, desc: "جواهر COC" },
+      { icon: "⚽", name: "FIFA Mobile", price: 2, desc: "FC Points" },
+      { icon: "🎮", name: "Roblox", price: 1, desc: "Robux" },
+      { icon: "🐉", name: "Genshin Impact", price: 3, desc: "Genesis Crystals" },
+      { icon: "🗡️", name: "Mobile Legends", price: 1.5, desc: "Diamonds" },
+      { icon: "🏆", name: "Brawl Stars", price: 2, desc: "Gems" },
+    ]
+  },
+  chat: {
+    icon: "💬", name: "تطبيقات التواصل",
+    items: [
+      { icon: "💜", name: "Zain Stars", price: 1, desc: "نجوم زين" },
+      { icon: "🟢", name: "واتساب بزنس", price: 3, desc: "حساب بزنس" },
+      { icon: "📸", name: "انستغرام متابعين", price: 2, desc: "1000 متابع" },
+      { icon: "▶️", name: "يوتيوب مشتركين", price: 3, desc: "500 مشترك" },
+      { icon: "🎵", name: "تيك توك متابعين", price: 2, desc: "1000 متابع" },
+    ]
+  },
+  boost: {
+    icon: "⚡", name: "الرشق",
+    items: [
+      { icon: "📱", name: "رشق فيسبوك", price: 2, desc: "رشق حقيقي" },
+      { icon: "📸", name: "رشق انستغرام", price: 2.5, desc: "لايكات وتعليقات" },
+      { icon: "🐦", name: "رشق تويتر", price: 2, desc: "ريتويت ولايكات" },
+      { icon: "▶️", name: "رشق يوتيوب", price: 3, desc: "مشاهدات حقيقية" },
+      { icon: "🎵", name: "رشق تيك توك", price: 2, desc: "مشاهدات وتفاعل" },
+    ]
+  },
+  cards: {
+    icon: "💳", name: "البطاقات",
+    items: [
+      { icon: "🍎", name: "iTunes", price: 5, desc: "بطاقة آيتيونز" },
+      { icon: "🎮", name: "PlayStation", price: 5, desc: "PSN Card" },
+      { icon: "🎲", name: "Steam", price: 5, desc: "Steam Wallet" },
+      { icon: "🛍️", name: "Amazon", price: 5, desc: "Amazon Gift Card" },
+      { icon: "📺", name: "Netflix", price: 10, desc: "Netflix Gift Card" },
+      { icon: "🎧", name: "Spotify", price: 5, desc: "Spotify Premium" },
+      { icon: "🪟", name: "Google Play", price: 5, desc: "Google Play Card" },
+      { icon: "💻", name: "Microsoft", price: 5, desc: "Xbox / Windows" },
+    ]
+  },
+  subs: {
+    icon: "📺", name: "الاشتراكات",
+    items: [
+      { icon: "🔴", name: "Netflix 1 شهر", price: 8, desc: "اشتراك شهري" },
+      { icon: "🎵", name: "Spotify Premium", price: 4, desc: "اشتراك شهري" },
+      { icon: "📦", name: "Amazon Prime", price: 6, desc: "اشتراك شهري" },
+      { icon: "🍿", name: "Disney+", price: 7, desc: "اشتراك شهري" },
+      { icon: "💻", name: "Office 365", price: 10, desc: "اشتراك سنوي" },
+    ]
+  },
+  accounts: {
+    icon: "👤", name: "حسابات جاهزة",
+    items: [
+      { icon: "🎮", name: "حساب PUBG", price: 10, desc: "حساب مميز" },
+      { icon: "⚽", name: "حساب FC", price: 8, desc: "حساب لعبة" },
+      { icon: "📺", name: "حساب Netflix", price: 5, desc: "حساب جاهز" },
+      { icon: "🎧", name: "حساب Spotify", price: 3, desc: "حساب شخصي" },
+    ]
+  },
+  design: {
+    icon: "🎨", name: "تصميم",
+    items: [
+      { icon: "🖌️", name: "Adobe Photoshop", price: 15, desc: "اشتراك شهري" },
+      { icon: "📐", name: "Adobe Illustrator", price: 15, desc: "اشتراك شهري" },
+      { icon: "🎥", name: "Adobe Premiere", price: 15, desc: "اشتراك شهري" },
+    ]
+  },
+  balance: {
+    icon: "💰", name: "الرصيد",
+    items: [
+      { icon: "📱", name: "رصيد MTN", price: 2, desc: "رصيد هاتف" },
+      { icon: "📡", name: "رصيد Syriatel", price: 2, desc: "رصيد هاتف" },
+      { icon: "💰", name: "رصيد PayPal", price: 5, desc: "رصيد PayPal" },
+    ]
+  },
+  numbers: {
+    icon: "📱", name: "الأرقام",
+    items: [
+      { icon: "📲", name: "رقم أمريكي", price: 3, desc: "رقم مؤقت" },
+      { icon: "📲", name: "رقم بريطاني", price: 3, desc: "رقم مؤقت" },
+      { icon: "📲", name: "رقم أوروبي", price: 3, desc: "رقم مؤقت" },
+    ]
+  },
+  verify: {
+    icon: "✅", name: "توثيق",
+    items: [
+      { icon: "✅", name: "توثيق واتساب", price: 5, desc: "شارة خضراء" },
+      { icon: "✅", name: "توثيق انستغرام", price: 10, desc: "شارة زرقاء" },
+      { icon: "✅", name: "توثيق تيليجرام", price: 5, desc: "شارة توثيق" },
+    ]
+  },
+  proxy: {
+    icon: "🌐", name: "بروكسيات",
+    items: [
+      { icon: "🌐", name: "بروكسي شهري", price: 4, desc: "IP مخصص" },
+      { icon: "🔒", name: "VPN شهري", price: 3, desc: "VPN سريع" },
+    ]
+  },
+  software: {
+    icon: "💻", name: "السوفتوير",
+    items: [
+      { icon: "💻", name: "Windows 11 Key", price: 8, desc: "مفتاح تفعيل" },
+      { icon: "🛡️", name: "Antivirus 1Y", price: 6, desc: "حماية سنوية" },
+    ]
+  },
+};
+
+function oC(catKey) {
+  const cat = CATS[catKey];
+  if (!cat) return;
+  const ttl = $("cTtl");
+  const cnt = $("cCnt");
+  const grid = $("pGrid");
+  const brd = $("brd1");
+  if (ttl) ttl.textContent = cat.icon + " " + cat.name;
+  if (cnt) cnt.textContent = cat.items.length + " منتج";
+  if (brd) brd.innerHTML = `<a style="cursor:pointer" onclick="nv('home')">🏠 الرئيسية</a> › ${cat.name}</span>`;
+  if (grid) {
+    grid.innerHTML = cat.items.map((it) => `
+      <div class="pcard" onclick="oBuy('${catKey}','${encodeURIComponent(it.name)}',${it.price},'${encodeURIComponent(it.desc || '')}')">
+        <div class="pcai">${it.icon}</div>
+        <div class="pcan">${it.name}</div>
+        <div class="pcas">${it.desc || ""}</div>
+        <div class="pcaa">${it.price.toFixed(2)}$</div>
+      </div>
+    `).join("");
+  }
+  nv("cat");
+  cls("sbo");
+  $("sb").classList.remove("on");
+}
+
+// ---- SEARCH ----
+function doSrch(q) {
+  const qTrim = q.trim();
+  const mSrch = $("mSrch");
+  const dSrch = $("dSrch");
+  if (mSrch && (mSrch).value !== q) (mSrch).value = q;
+  if (dSrch && (dSrch).value !== q) (dSrch).value = q;
+  if (!qTrim) { nv("home"); return; }
+  const results = [];
+  Object.entries(CATS).forEach(([key, cat]) => {
+    cat.items.forEach((it) => {
+      if (it.name.includes(qTrim) || (it.desc && it.desc.includes(qTrim))) {
+        results.push({ ...it, catKey: key });
+      }
+    });
+  });
+  const qEl = $("srchQ");
+  const cEl = $("srchC");
+  const grid = $("srchG");
+  if (qEl) qEl.textContent = qTrim;
+  if (cEl) cEl.textContent = results.length + " نتيجة";
+  if (grid) {
+    grid.innerHTML = results.length ? results.map((it) => `
+      <div class="pcard" onclick="oBuy('${it.catKey}','${encodeURIComponent(it.name)}',${it.price},'${encodeURIComponent(it.desc || '')}')">
+        <div class="pcai">${it.icon}</div>
+        <div class="pcan">${it.name}</div>
+        <div class="pcas">${it.desc || ""}</div>
+        <div class="pcaa">${it.price.toFixed(2)}$</div>
+      </div>
+    `).join("") : `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mu)">لم يتم إيجاد نتائج</div>`;
+  }
+  nv("srch");
+}
+
+// ---- BUY FLOW ----
+let buyQty = 1;
+let buyInfo = null;
+let buyStep = 1;
+
+function oBuy(catKey, name, price, desc) {
+  buyInfo = { catKey, name: decodeURIComponent(name), price, desc: decodeURIComponent(desc) };
+  buyQty = 1;
+  buyStep = 1;
+  $("buyTtl").textContent = "🛒 " + decodeURIComponent(name);
+  renderBuy();
+  oOv("buyOv");
+}
+
+function renderBuy() {
+  if (!buyInfo) return;
+  const body = $("buyBody");
+  const total = (buyInfo.price * buyQty).toFixed(2);
+
+  if (buyStep === 1) {
+    body.innerHTML = `
+      <div class="stbar">
+        <div class="sth cur">١ الكمية</div>
+        <div class="sth">٢ المراجعة</div>
+        <div class="sth">٣ استلام</div>
+      </div>
+      <div class="qty-wrap">
+        <div class="qty-lbl">اختر الكمية</div>
+        <div class="qty-ctl">
+          <button class="qty-btn" onclick="chgQty(-1)">−</button>
+          <div class="qty-val" id="qv">1</div>
+          <button class="qty-btn" onclick="chgQty(1)">+</button>
+        </div>
+        <div class="qty-total">المجموع: <strong id="qt">${total}$</strong></div>
+      </div>
+      <div class="fg"><label class="fl">معلومات إضافية (معرّف / يوزر)</label><input class="fi" id="bUid" placeholder="UID أو اسم المستخدم الخاص باللعبة"></div>
+      <button class="bp" onclick="bNext()">متابعة →</button>
+    `;
+  } else if (buyStep === 2) {
+    const bal = wallet.toFixed(2);
+    const enough = wallet >= buyInfo.price * buyQty;
+    body.innerHTML = `
+      <div class="stbar">
+        <div class="sth dn">١ الكمية ✓</div>
+        <div class="sth cur">٢ المراجعة</div>
+        <div class="sth">٣ استلام</div>
+      </div>
+      <div class="osum">
+        <div class="or">المنتج</span>${buyInfo.name}</span></div>
+        <div class="or">الكمية</span>${buyQty}</span></div>
+        <div class="or tot">الإجمالي</span>${total}$</span></div>
+      </div>
+      <div class="${enough ? "gb" : "rb"}">
+        ${enough
+          ? `✅ رصيدك كافٍ (${bal}$) — سيُخصم ${total}$</strong>`
+          : `❌ رصيدك غير كافٍ (${bal}$) — تحتاج ${total}$</strong>`
+        }
+      </div>
+      ${enough
+        ? `<button class="bp" onclick="bConfirm()">✅ تأكيد الشراء</button>`
+        : `<button class="bp" onclick="cls('buyOv');oDep()">💳 شحن الرصيد</button>`
+      }
+      <button class="bs" onclick="buyStep=1;renderBuy()">← رجوع</button>
+    `;
+  } else if (buyStep === 3) {
+    const txId = "FC" + Math.random().toString(36).slice(2, 9).toUpperCase();
+    body.innerHTML = `
+      <div class="sucbox">
+        <div class="suci">✅</div>
+        <div class="suct">تمت العملية بنجاح!</div>
+        <div class="sucm">تم خصم ${(buyInfo.price * buyQty).toFixed(2)}$</strong> من محفظتكالمنتج سيُسلَّم خلال دقائق</div>
+        <div class="sucid">رقم الطلب: ${txId}</div>
+        <button class="bwa" onclick="cls('buyOv')">🎉 رائع!</button>
+      </div>
+    `;
+  }
+}
+
+function chgQty(d) {
+  buyQty = Math.max(1, Math.min(10, buyQty + d));
+  const qv = document.getElementById("qv");
+  const qt = document.getElementById("qt");
+  if (qv) qv.textContent = String(buyQty);
+  if (qt && buyInfo) qt.textContent = (buyInfo.price * buyQty).toFixed(2) + "$";
+}
+
+function bNext() {
+  if (!user) { cls("buyOv"); oOv("loginOv"); toast("سجّل الدخول أولاً", "er"); return; }
+  buyStep = 2;
+  renderBuy();
+}
+
+function bConfirm() {
+  if (!buyInfo) return;
+  wallet = Math.max(0, wallet - buyInfo.price * buyQty);
+  updateBal();
+  buyStep = 3;
+  renderBuy();
+  toast("✅ تمت العملية بنجاح!", "ok");
+}
+
+// ---- LOGIN / REGISTER ----
+function doLogin() {
+  const em = ($("lEm")).value.trim();
+  const pw = ($("lPw")).value.trim();
+  if (!em || !pw) { toast("يرجى ملء جميع الحقول", "er"); return; }
+  user = { name: em.split("@")[0], email: em, phone: "" };
+  localStorage.setItem("fcUser", JSON.stringify(user));
+  cls("loginOv");
+  updateAuth();
+  toast("مرحباً " + user.name + "!", "ok");
+}
+
+function doReg() {
+  const fn = ($("rFn")).value.trim();
+  const ln = ($("rLn")).value.trim();
+  const em = ($("rEm")).value.trim();
+  const ph = ($("rPh")).value.trim();
+  if (!fn || !em || !ph) { toast("يرجى ملء الحقول المطلوبة", "er"); return; }
+  user = { name: fn + " " + ln, email: em, phone: ph };
+  localStorage.setItem("fcUser", JSON.stringify(user));
+  cls("regOv");
+  updateAuth();
+  toast("تم إنشاء الحساب بنجاح! أهلاً " + fn, "ok");
+}
+
+// ============================================================
+// DEPOSIT FLOW (الإيداع)
+// ============================================================
+
+function oDep() {
+  depMethod = "";
+  depAmt = 0;
+  stopPoll();
+  renderDep(1);
+  oOv("depOv");
+}
+
+function closeDep() {
+  stopPoll();
+  cls("depOv");
+}
+
+function renderDep(step) {
+  const body = $("depBody");
+  const ttl = $("depTtl");
+  if (!body || !ttl) return;
+  // Always syriatel only
+  depMethod = "syr";
+
+  const SYP_AMOUNTS = [10000, 25000, 50000, 75000, 100000, 150000, 200000, 500000];
+
+  if (step === 1) {
+    ttl.textContent = "💳 شحن الرصيد — سيرياتيل كاش";
+    body.innerHTML = `
+      <div class="stbar">
+        <div class="sth cur">١ المبلغ</div>
+        <div class="sth">٢ التحويل</div>
+        <div class="sth">٣ تم</div>
+      </div>
+      <div style="background:var(--c2);border:1px solid rgba(249,115,22,.25);border-radius:13px;padding:14px;display:flex;align-items:center;gap:13px;margin-bottom:14px">
+        <div style="font-size:30px">🔴</div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:800">سيرياتيل كاش</div>
+          <div style="font-size:11px;color:var(--mu);margin-top:2px">تحقق أوتوماتيكي فوري</div>
+          <div style="font-size:14px;font-weight:900;color:var(--p);direction:ltr;margin-top:4px">${SYR_NUM}</div>
+        </div>
+        <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:4px 10px;font-size:11px;color:var(--grn);font-weight:700">✅ متاح</div>
+      </div>
+      <div class="wb">💱 سعر الصرف الحالي: <strong>1$ = ${RATE.toLocaleString()} ل.س</strong></div>
+      <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:9px">اختر المبلغ بالليرة السورية:</div>
+      <div class="achips">
+        ${SYP_AMOUNTS.map(a => `
+          <div class="ac${depAmt===a?' on':''}" onclick="pickAmtSYP(${a})">
+            <div class="ac-v">${(a/1000)+'K'}</div>
+            <div class="ac-s">ل.س ≈ $${(a/RATE).toFixed(1)}</div>
+          </div>`).join("")}
+      </div>
+      <div class="fg">
+        <label class="fl">أو أدخل مبلغاً مخصصاً (بالليرة السورية)</label>
+        <input class="fi" id="custAmt" type="number" min="5000" step="1000" placeholder="مثال: 30000" oninput="custAmtSYPChange(this.value)">
+      </div>
+      ${depAmt ? `
+        <div class="numbox" style="margin-bottom:12px">
+          <div class="numbox-lbl">المبلغ الذي ستحوّله</div>
+          <div class="numbox-val">${depAmt.toLocaleString()} <span style="font-size:14px;color:var(--mu)">ل.س</span></div>
+          <div class="numbox-sub">سيُضاف لمحفظتك: <strong style="color:var(--p)">$${(depAmt/RATE).toFixed(2)}</strong></div>
+        </div>` : ""}
+      <button class="bp" onclick="depStep3SYP()" ${depAmt?'':'disabled'}>التالي — أدخل رقمك وحوّل →</button>
+    `;
+  } else if (step === 3) {
+    const syp = (depAmt * RATE).toLocaleString("ar-SY");
+    const isSyr = depMethod === "syr";
+    ttl.textContent = isSyr ? "🔴 سيرياتيل كاش" : "🟢 شام كاش";
+    body.innerHTML = `
+      <div class="stbar">
+        <div class="sth dn">١ الطريقة ✓</div>
+        <div class="sth dn">٢ المبلغ ✓</div>
+        <div class="sth cur">٣ التحويل</div>
+        <div class="sth">٤ تم</div>
+      </div>
+      <div class="osum">
+        <div class="or">الطريقة</span>${isSyr?"🔴 سيرياتيل كاش":"🟢 شام كاش"}</span></div>
+        <div class="or">الرقم</span><span style="direction:ltr">${isSyr?SYR_NUM:SHAM_NUM}</span></div>
+        <div class="or tot">المبلغ</span>${syp} ل.س (${depAmt}$)</span></div>
+      </div>
+      <div class="numbox">
+        <div class="numbox-lbl">حوّل هذا المبلغ بالضبط</div>
+        <div class="numbox-val">${syp} <span style="font-size:14px;color:var(--mu)">ل.س</span></div>
+        <div class="copy-row">
+          ${isSyr?SYR_NUM:SHAM_NUM}</div>
+          <button class="cbtn" onclick="copyNum('${isSyr?SYR_NUM:SHAM_NUM}')">نسخ الرقم</button>
+          <button class="cbtn" onclick="copySyp(${depAmt*RATE})">نسخ المبلغ</button>
+        </div>
+      </div>
+      ${isSyr ? `
+        <div class="ib">🤖 سيتحقق النظام تلقائياً من التحويل كل 12 ثانية عبر SyrCash API.
+        يرجى إدخال رقمك لتتبع التحويل.</strong></div>
+        <div class="fg">
+          <label class="fl">رقم سيرياتيل كاش الخاص بك</label>
+          <input class="fi" id="custPhone" type="tel" placeholder="09XXXXXXXX" maxlength="10">
+        </div>
+        <button class="bp" id="startPollBtn" onclick="startAutoCheck()">🚀 بدأت التحويل — تحقق تلقائياً</button>
+      ` : `
+        <div class="wb">📌 بعد التحويل، تواصل على واتساب مع رقم الحوالة للتأكيد اليدوي.</div>
+        <a onclick="openWA('https://wa.me/9820982493924?text=أريد+شحن+${depAmt}$+شام+كاش')" style="cursor:pointer" class="bwa">📱 إرسال إيصال للدعم</a>
+        <button class="bp" style="margin-top:8px" onclick="depManualDone()">✅ أرسلت التحويل</button>
+      `}
+      <button class="bs" onclick="renderDep(2)">← رجوع</button>
+    `;
+  } else if (step === 4) {
+    ttl.textContent = "✅ تم الإيداع!";
+    body.innerHTML = `
+      <div class="sucbox">
+        <div class="suci">🎉</div>
+        <div class="suct">تم إضافة الرصيد!</div>
+        <div class="sucm">تمت إضافة ${depAmt.toFixed(2)}$</strong> إلى محفظتكرصيدك الحالي: ${wallet.toFixed(2)}$</strong></div>
+        <div class="sucid">تم التحقق تلقائياً عبر SyrCash API ✅</div>
+        <button class="bwa" onclick="cls('depOv')">🛒 تسوق الآن</button>
+      </div>
+    `;
+  }
+}
+
+function pickMethod(m) {
+  depMethod = m;
+  renderDep(1);
+}
+
+function pickAmt(a) {
+  depAmt = a; // now a is SYP amount
+  renderDep(2);
+}
+
+function custAmtChange(v) {
+  const n = parseFloat(v);
+  depAmt = isNaN(n) || n <= 0 ? 0 : n;
+  // Update chips highlighting without re-rendering (avoid losing focus)
+  document.querySelectorAll(".ac").forEach((el) => {
+    const val = parseFloat(el.querySelector(".ac-v")?.textContent || "0");
+    el.classList.toggle("on", val === depAmt);
+  });
+  // Enable/disable submit
+  const btn = document.querySelector("#depBody .bp");
+  if (btn) btn.disabled = !depAmt;
+  // Update preview numbox
+  const syp = (depAmt * RATE).toLocaleString("ar-SY");
+  let nb = document.querySelector(".numbox");
+  if (!nb && depAmt) {
+    // Insert numbox before button
+    const btnEl = $("depBody").querySelector(".bp");
+    const div = document.createElement("div");
+    div.className = "numbox";
+    div.style.marginBottom = "12px";
+    div.innerHTML = `<div class="numbox-lbl">ستُحول إلى المتجر</div>
+      <div class="numbox-val">${syp} <span style="font-size:14px;color:var(--mu)">ل.س</span></div>
+      <div class="numbox-sub">= ${depAmt}$</div>`;
+    if (btnEl) $("depBody").insertBefore(div, btnEl);
+  } else if (nb) {
+    nb.querySelector(".numbox-val").innerHTML = `${syp} <span style="font-size:14px;color:var(--mu)">ل.س</span>`;
+    (nb.querySelector(".numbox-sub")).textContent = `= ${depAmt}$`;
+  }
+}
+
+function depStep2() {
+  if (!depMethod) { toast("اختر طريقة الدفع", "er"); return; }
+  renderDep(2);
+}
+
+function depStep3() {
+  if (!depAmt) { toast("اختر المبلغ", "er"); return; }
+  renderDep(3);
+}
+
+function copyNum(n) {
+  navigator.clipboard.writeText(n).then(() => toast("✅ تم نسخ الرقم", "ok"));
+}
+
+function copySyp(n) {
+  navigator.clipboard.writeText(String(n)).then(() => toast("✅ تم نسخ المبلغ", "ok"));
+}
+
+function depManualDone() {
+  // Sham Cash: manual confirmation via WhatsApp
+  wallet += depAmt;
+  updateBal();
+  stopPoll();
+  renderDep(4);
+  toast("✅ تم استلام طلبك! سيُضاف الرصيد بعد التأكيد", "ok");
+}
+
+// ---- AUTO-DEPOSIT POLLING (Syriatel Cash via SyrCash API) ----
+
+function startAutoCheck() {
+  const phoneEl = document.getElementById("custPhone") | null;
+  const phone = phoneEl?.value.trim() ?? "";
+  if (!phone || phone.length < 9) {
+    toast("يرجى إدخال رقم سيرياتيل كاش الصحيح", "er");
+    return;
+  }
+  // Disable the button
+  const btn = document.getElementById("startPollBtn");
+  if (btn) {
+    btn.setAttribute("disabled", "true");
+    (btn).textContent = "جاري التحقق...";
+  }
+
+  depInitTs = Math.floor(Date.now() / 1000);
+  pollCount = 0;
+
+  // Show polling UI
+  const body = $("depBody");
+  const syp = (depAmt * RATE).toLocaleString("ar-SY");
+  const pollBox = document.createElement("div");
+  pollBox.id = "pollBox";
+  pollBox.className = "poll-box";
+  pollBox.innerHTML = `
+    <div class="poll-ic">🔍</div>
+    <div class="poll-t">جاري التحقق من التحويل...</div>
+    <div class="poll-s">النظام يبحث عن تحويل بمبلغ ${syp} ل.س</strong>من رقمك <strong style="direction:ltr">${phone}</strong></div>
+    <div class="poll-dots"><div class="poll-dot"></div><div class="poll-dot"></div><div class="poll-dot"></div></div>
+    <div class="poll-timer" id="pollCountdown">04:00</div>
+    <div class="poll-sub">الوقت المتبقي للتحقق</div>
+  `;
+  body.insertBefore(pollBox, body.querySelector(".bs"));
+
+  // Countdown timer UI
+  let remaining = POLL_MAX_ATTEMPTS * (POLL_INTERVAL_MS / 1000);
+  const cdEl = () => document.getElementById("pollCountdown");
+  const cdTimer = setInterval(() => {
+    remaining = Math.max(0, remaining - 1);
+    const el = cdEl();
+    if (el) {
+      const m = Math.floor(remaining / 60).toString().padStart(2, "0");
+      const s = (remaining % 60).toString().padStart(2, "0");
+      el.textContent = `${m}:${s}`;
+    }
+    if (remaining <= 0) clearInterval(cdTimer);
+  }, 1000);
+
+  // Start polling
+  doPoll(phone, cdTimer);
+  pollTimer = setInterval(() => doPoll(phone, cdTimer), POLL_INTERVAL_MS);
+}
+
+async function doPoll(phone, cdTimer) {
+  pollCount++;
+  if (pollCount > POLL_MAX_ATTEMPTS) {
+    stopPoll();
+    clearInterval(cdTimer);
+    pollFailed();
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/deposit/check-syr", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        phone,
+        amountSYP: depAmt * RATE,
+        afterTs: depInitTs,
+      }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: "خطأ في الخادم" }));
+      // If API token not configured, fall back gracefully
+      if (res.status === 503) {
+        stopPoll();
+        clearInterval(cdTimer);
+        pollApiUnconfigured(err.error || "");
+        return;
+      }
+      return; // Non-fatal error — keep polling
+    }
+
+    const data = await res.json();
+    if (data.found) {
+      stopPoll();
+      clearInterval(cdTimer);
+      pollSuccess();
+    }
+    // else: not found yet — keep polling
+  } catch {
+    // Network error — keep polling silently
+  }
+}
+
+function stopPoll() {
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
+  }
+  pollCount = 0;
+}
+
+function pollSuccess() {
+  wallet += depAmt;
+  updateBal();
+  renderDep(4);
+  toast("✅ تم التحقق من التحويل وإضافة الرصيد!", "ok", 5000);
+}
+
+function pollFailed() {
+  const pb = document.getElementById("pollBox");
+  if (pb) {
+    pb.innerHTML = `
+      <div class="poll-ic">⏰</div>
+      <div class="poll-t">انتهى وقت التحقق</div>
+      <div class="poll-s">لم يتم اكتشاف التحويل خلال المدة المحددة.تواصل مع الدعم للمساعدة.</div>
+    `;
+  }
+  // Show manual fallback
+  const body = $("depBody");
+  const existing = document.getElementById("manualFallback");
+  if (!existing) {
+    const div = document.createElement("div");
+    div.id = "manualFallback";
+    div.innerHTML = `<a onclick="openWA('https://wa.me/9820982493924?text=أريد+شحن+${depAmt}$+سيرياتيل+كاش')" style="cursor:pointer" class="bwa" style="margin-top:8px">📱 تواصل مع الدعم</a>`;
+    body.appendChild(div);
+  }
+  toast("⏰ لم يُكتشف التحويل — تواصل مع الدعم", "er", 6000);
+}
+
+function pollApiUnconfigured(errMsg) {
+  const pb = document.getElementById("pollBox");
+  if (pb) {
+    pb.innerHTML = `
+      <div class="poll-ic">⚙️</div>
+      <div class="poll-t">التحقق التلقائي غير مُفعّل</div>
+      <div class="poll-s">يرجى تواصل مع الدعم لإكمال الإيداع يدوياً.<small style="color:var(--mu)">${errMsg}</small></div>
+    `;
+  }
+  const body = $("depBody");
+  const existing = document.getElementById("manualFallback");
+  if (!existing) {
+    const div = document.createElement("div");
+    div.id = "manualFallback";
+    div.innerHTML = `<a onclick="openWA('https://wa.me/9820982493924?text=أريد+شحن+${depAmt}$+سيرياتيل+كاش')" style="cursor:pointer" class="bwa" style="margin-top:8px">📱 تواصل مع الدعم</a>`;
+    body.appendChild(div);
+  }
+  toast("⚙️ سيتم التحقق يدوياً عبر الدعم", "in", 5000);
+}
+
+// ---- EXPOSE GLOBALS (inline onclick handlers in HTML) ----
+const G = window;
+G.nv = nv;
+
+// Override doSrch to use API first
+(function() {
+  const _orig = window.doSrch;
+  window.doSrch = function(q) {
+    const dSrch = document.getElementById('dSrch');
+    const mSrch = document.getElementById('mSrch');
+    if (dSrch && dSrch.value !== q) dSrch.value = q;
+    if (mSrch && mSrch.value !== q) mSrch.value = q;
+    if (window.apiLoaded && window.doSrchAPI && window.doSrchAPI(q)) return;
+    if (_orig) _orig(q);
+  };
+  G.doSrch = window.doSrch;
+  G.doSrchAPI = window.doSrchAPI;
+})();
+
+// Override renderAdminDash to show API balance
+(function() {
+  const _orig = window.renderAdminDash;
+  window.renderAdminDash = function() {
+    if (_orig) _orig();
+    setTimeout(() => {
+      if (!window.apiBalance) return;
+      const grid = document.querySelector('#admTab-general .adm-stat-card')?.parentNode;
+      if (!grid) return;
+      const exists = document.getElementById('apiBalCard');
+      if (exists) return;
+      const card = document.createElement('div');
+      card.id = 'apiBalCard';
+      card.className = 'adm-stat-card';
+      card.style.cssText = 'background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2)';
+      card.innerHTML = '<div class="adm-stat-n" style="color:var(--p)">$' + window.apiBalance.toFixed(2) + '</div><div class="adm-stat-l">رصيد FastCard API</div>';
+      grid.appendChild(card);
+    }, 200);
+  };
+  G.renderAdminDash = window.renderAdminDash;
+})();
+G.gB = gB;
+G.oSb = oSb;
+G.cSb = cSb;
+G.cSl = cSl;
+G.gSl = gSl;
+G.oC = oC;
+G.doSrch = doSrch;
+G.oBuy = oBuy;
+G.chgQty = chgQty;
+G.bNext = bNext;
+G.bConfirm = bConfirm;
+G.doLogin = doLogin;
+G.doReg = doReg;
+G.oDep = oDep;
+G.closeDep = closeDep;
+G.cls = cls;
+G.oOv = oOv;
+G.sw = sw;
+G.pickMethod = pickMethod;
+G.pickAmt = pickAmt;
+G.custAmtChange = custAmtChange;
+G.depStep2 = depStep2;
+G.depStep3 = depStep3;
+G.copyNum = copyNum;
+G.copySyp = copySyp;
+G.depManualDone = depManualDone;
+G.startAutoCheck = startAutoCheck;
+G.renderDep = renderDep;
+
+// ---- INIT ----
+function init() {
+  updateBal();
+  updateAuth();
+  startSlider();
+  setTimeout(() => {
+    const ldr = $("ldr");
+    if (ldr) ldr.classList.add("off");
+  }, 600);
+}
+
+function openWA(url) {
+  try { window.open(url, '_blank'); } catch(e) {}
+  // fallback: copy number
+  const num = url.replace('https://wa.me/','').split('?')[0];
+  if(navigator.clipboard) navigator.clipboard.writeText('00'+num).then(()=>toast('تم نسخ الرقم: 00'+num,'ok'));
+}
+
+// Modules are deferred — DOM is already parsed when this runs
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+
+const ADMIN_PASS = "admin123"; // غيّر هذا لكلمة سر قوية
+let isAdmin = false;
+
+// ---- الإعدادات المحفوظة ----
+let adminSettings = JSON.parse(localStorage.getItem("fcAdminSettings") || JSON.stringify({
+  rate: 13000,
+  profit: 10,          // هامش الربح %
+  shamNum: "0982493924",
+  syrNum: "0982493924",
+  storeName: "GameZone",
+  whatsapp: "9820982493924",
+}));
+
+function saveAdminSettings() {
+  localStorage.setItem("fcAdminSettings", JSON.stringify(adminSettings));
+}
+
+// تطبيق الإعدادات على المتغيرات العامة
+function applySettings() {
+  (window).RATE     = adminSettings.rate;
+  (window).SYR_NUM  = adminSettings.syrNum;
+  (window).SHAM_NUM = adminSettings.shamNum;
+}
+
+// ---- فتح لوحة الأدمن ----
+function openAdmin() {
+  if (!isAdmin) {
+    renderAdminLogin();
+  } else {
+    renderAdminDash();
+  }
+  oOv("adminOv");
+}
+
+function renderAdminLogin() {
+  ($("adminTtl")).textContent = "🔐 دخول الأدمن";
+  ($("adminBody")).innerHTML = `
+    <div class="fg">
+      <label class="fl">كلمة سر الأدمن</label>
+      <input class="fi" id="adminPwIn" type="password" placeholder="••••••••">
+    </div>
+    <div class="rb" id="adminErr" style="display:none">كلمة السر غير صحيحة</div>
+    <button class="bp" onclick="doAdminLogin()">دخول</button>
+  `;
+}
+
+function doAdminLogin() {
+  const pw = (document.getElementById("adminPwIn")).value;
+  if (pw === ADMIN_PASS) {
+    isAdmin = true;
+    renderAdminDash();
+  } else {
+    const err = document.getElementById("adminErr");
+    if (err) err.style.display = "block";
+  }
+}
+
+function renderAdminDash() {
+  const s = adminSettings;
+  ($("adminTtl")).textContent = "⚙️ لوحة الإدارة";
+  ($("adminBody")).innerHTML = `
+
+    <!-- TABS -->
+    <div style="display:flex;gap:6px;margin-bottom:16px;background:var(--c2);border-radius:10px;padding:4px">
+      <button class="adm-tab on" id="tab-general" onclick="admTab('general')">⚙️ عام</button>
+      <button class="adm-tab" id="tab-prices" onclick="admTab('prices')">💰 الأسعار</button>
+      <button class="adm-tab" id="tab-orders" onclick="admTab('orders')">📦 الطلبات</button>
+    </div>
+
+    <!-- TAB: GENERAL -->
+    <div id="admTab-general" class="adm-tab-body">
+
+      <div class="adm-section">سعر الصرف وهامش الربح</div>
+
+      <div class="fg">
+        <label class="fl">سعر الدولار (ليرة سورية)</label>
+        <div style="position:relative">
+          <input class="fi" id="admRate" type="number" value="${s.rate}" min="1000" step="100">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--mu)">ل.س</span>
+        </div>
+        <div style="font-size:11px;color:var(--mu);margin-top:4px">1$ = <span id="ratePreview">${s.rate.toLocaleString()}</span> ل.س</div>
+      </div>
+
+      <div class="fg">
+        <label class="fl">هامش الربح (%)</label>
+        <div style="position:relative">
+          <input class="fi" id="admProfit" type="number" value="${s.profit}" min="0" max="100" step="0.5">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--mu)">%</span>
+        </div>
+        <div style="font-size:11px;color:var(--mu);margin-top:4px">مثال: منتج بـ $10 سيُباع بـ <span id="profitPreview">$${(10 * (1 + s.profit/100)).toFixed(2)}</span></div>
+      </div>
+
+      <div class="adm-section">أرقام الدفع</div>
+
+      <div class="fg">
+        <label class="fl">رقم شام كاش</label>
+        <input class="fi" id="admSham" type="tel" value="${s.shamNum}" placeholder="09XXXXXXXX">
+      </div>
+
+      <div class="fg">
+        <label class="fl">رقم سيرياتيل كاش</label>
+        <input class="fi" id="admSyr" type="tel" value="${s.syrNum}" placeholder="09XXXXXXXX">
+      </div>
+
+      <div class="fg">
+        <label class="fl">رقم واتساب الدعم</label>
+        <input class="fi" id="admWa" type="tel" value="${s.whatsapp}" placeholder="9820982493924">
+      </div>
+
+      <div class="adm-section">إحصائيات سريعة</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+        <div class="adm-stat-card">
+          <div class="adm-stat-n">${(JSON.parse(localStorage.getItem("fcOrders")||"[]")).length}</div>
+          <div class="adm-stat-l">إجمالي الطلبات</div>
+        </div>
+        <div class="adm-stat-card">
+          <div class="adm-stat-n">$${(JSON.parse(localStorage.getItem("fcOrders")||"[]")).reduce((a,b)=>a+(b.total||0),0).toFixed(2)}</div>
+          <div class="adm-stat-l">إجمالي المبيعات</div>
+        </div>
+        <div class="adm-stat-card">
+          <div class="adm-stat-n">${s.rate.toLocaleString()}</div>
+          <div class="adm-stat-l">سعر الدولار الحالي</div>
+        </div>
+        <div class="adm-stat-card">
+          <div class="adm-stat-n">${s.profit}%</div>
+          <div class="adm-stat-l">هامش الربح</div>
+        </div>
+      </div>
+
+      <button class="bp" onclick="saveAdm()">💾 حفظ الإعدادات</button>
+      <button class="bs" onclick="admLogout()">🚪 تسجيل الخروج</button>
+    </div>
+
+    <!-- TAB: PRICES -->
+    <div id="admTab-prices" class="adm-tab-body" style="display:none">
+      <div class="ib">يمكنك تعديل أسعار الفئات مباشرة. التغييرات تُحفظ فوراً.</div>
+      <div id="pricesList"></div>
+      <button class="bp" onclick="savePrices()">💾 حفظ الأسعار</button>
+    </div>
+
+    <!-- TAB: ORDERS -->
+    <div id="admTab-orders" class="adm-tab-body" style="display:none">
+      <div id="ordersList"></div>
+    </div>
+  `;
+
+  // Live preview for rate
+  const rateInput = document.getElementById("admRate");
+  const profitInput = document.getElementById("admProfit");
+  rateInput?.addEventListener("input", () => {
+    const el = document.getElementById("ratePreview");
+    if (el) el.textContent = parseInt(rateInput.value||"0").toLocaleString();
+  });
+  profitInput?.addEventListener("input", () => {
+    const el = document.getElementById("profitPreview");
+    if (el) el.textContent = "$"+(10*(1+parseFloat(profitInput.value||"0")/100)).toFixed(2);
+  });
+}
+
+function admTab(tab) {
+  document.querySelectorAll(".adm-tab").forEach(t => t.classList.remove("on"));
+  document.querySelectorAll(".adm-tab-body").forEach(b => (b).style.display = "none");
+  const btn = document.getElementById("tab-"+tab);
+  const body = document.getElementById("admTab-"+tab);
+  if (btn) btn.classList.add("on");
+  if (body) body.style.display = "block";
+
+  if (tab === "prices") renderPricesTab();
+  if (tab === "orders") renderOrdersTab();
+}
+
+function renderPricesTab() {
+  const list = document.getElementById("pricesList");
+  if (!list) return;
+  const markup = Object.entries(CATS).map(([key, cat]) => `
+    <div style="margin-bottom:14px">
+      <div class="adm-section">${cat.icon} ${cat.name}</div>
+      ${cat.items.map((it, i) => `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;background:var(--c2);border-radius:9px;padding:9px 11px">
+          <span style="font-size:16px">${it.icon}</span>
+          <span style="flex:1;font-size:12px;font-weight:600">${it.name}</span>
+          <div style="position:relative;width:90px">
+            <input class="fi" type="number" id="pr_${key}_${i}" value="${it.price}" min="0.1" step="0.1"
+              style="padding:6px 22px 6px 8px;font-size:12px;width:100%">
+            <span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--mu)">$</span>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+  list.innerHTML = markup;
+}
+
+function savePrices() {
+  Object.entries(CATS).forEach(([key, cat]) => {
+    cat.items.forEach((it, i) => {
+      const inp = document.getElementById(`pr_${key}_${i}`);
+      if (inp) it.price = parseFloat(inp.value) || it.price;
+    });
+  });
+  // Apply profit margin
+  const profit = adminSettings.profit / 100;
+  Object.values(CATS).forEach(cat => {
+    cat.items.forEach(it => {
+      it.price = parseFloat((it.price * (1 + profit)).toFixed(2));
+    });
+  });
+  toast("✅ تم حفظ الأسعار مع هامش الربح", "ok");
+}
+
+function renderOrdersTab() {
+  const list = document.getElementById("ordersList");
+  if (!list) return;
+  const orders =
+    JSON.parse(localStorage.getItem("fcOrders") || "[]");
+  if (!orders.length) {
+    list.innerHTML = `<div style="text-align:center;padding:40px;color:var(--mu)">لا توجد طلبات بعد</div>`;
+    return;
+  }
+  list.innerHTML = orders.slice().reverse().map(o => `
+    <div style="background:var(--c2);border:1px solid var(--br);border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:11px;font-weight:700;color:var(--p)">${o.id}</span>
+        <span style="font-size:10px;color:var(--mu)">${o.time}</span>
+      </div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:3px">${o.name} × ${o.qty}</div>
+      ${o.uid ? `<div style="font-size:11px;color:var(--mu);direction:ltr">UID: ${o.uid}</div>` : ""}
+      <div style="font-size:14px;font-weight:900;color:var(--p);margin-top:5px">$${o.total.toFixed(2)}</div>
+    </div>
+  `).join("");
+}
+
+function saveAdm() {
+  const rate   = parseInt((document.getElementById("admRate"))?.value || "0");
+  const profit = parseFloat((document.getElementById("admProfit"))?.value || "0");
+  const sham   = (document.getElementById("admSham"))?.value.trim();
+  const syr    = (document.getElementById("admSyr"))?.value.trim();
+  const wa     = (document.getElementById("admWa"))?.value.trim();
+
+  if (!rate || rate < 1000) { toast("سعر الصرف غير صحيح", "er"); return; }
+  if (profit < 0 || profit > 100) { toast("هامش الربح يجب أن يكون بين 0 و 100", "er"); return; }
+
+  adminSettings = { ...adminSettings, rate, profit, shamNum: sham, syrNum: syr, whatsapp: wa };
+  saveAdminSettings();
+  applySettings();
+  toast("✅ تم حفظ الإعدادات بنجاح!", "ok");
+  cls("adminOv");
+}
+
+function admLogout() {
+  isAdmin = false;
+  cls("adminOv");
+  toast("تم تسجيل خروج الأدمن", "in");
+}
+
+// حفظ الطلبات في localStorage
+const _origBConfirm = (window).bConfirm;
+(window).bConfirm = function() {
+  if (!(window).buyInfo) return;
+  const bi = (window).buyInfo;
+  const bq = (window).buyQty || 1;
+  const orders = JSON.parse(localStorage.getItem("fcOrders") || "[]");
+  const uid = (document.getElementById("bUid"))?.value?.trim() || "";
+  orders.push({
+    id: "FC" + Math.random().toString(36).slice(2,9).toUpperCase(),
+    name: bi.name, qty: bq, total: bi.price * bq,
+    uid, time: new Date().toLocaleString("ar-SY")
+  });
+  localStorage.setItem("fcOrders", JSON.stringify(orders));
+  if (_origBConfirm) _origBConfirm();
+};
+
+// تطبيق الإعدادات المحفوظة عند البدء
+applySettings();
+
+// تصدير
+G.openAdmin = openAdmin;
+G.doAdminLogin = doAdminLogin;
+G.saveAdm = saveAdm;
+G.admTab = admTab;
+G.savePrices = savePrices;
+G.admLogout = admLogout;
+
+// فتح الأدمن بالضغط 5 مرات على الشعار
+let adminClickCount = 0;
+let adminClickTimer = null;
+function admClick() {
+  adminClickCount++;
+  if (adminClickTimer) clearTimeout(adminClickTimer);
+  adminClickTimer = setTimeout(() => { adminClickCount = 0; }, 2000);
+  if (adminClickCount >= 5) {
+    adminClickCount = 0;
+    openAdmin();
+  }
+}
+G.admClick = admClick;
+
+
+
+// ── إيداع سيرياتيل كاش بالليرة السورية فقط ──
+function pickAmtSYP(a) {
+  depAmt = a;
+  renderDep(1);
+}
+
+function custAmtSYPChange(v) {
+  const n = parseInt(v) || 0;
+  depAmt = n >= 5000 ? n : 0;
+  document.querySelectorAll(".ac").forEach(el => {
+    const val = parseInt(el.querySelector(".ac-v")?.textContent?.replace("K","000") || "0") * (el.querySelector(".ac-v")?.textContent?.includes("K") ? 1 : 1);
+    el.classList.remove("on");
+  });
+  const btn = document.querySelector("#depBody .bp");
+  if (btn) btn.disabled = !depAmt;
+  // update preview
+  let nb = document.querySelector(".numbox");
+  if (depAmt && !nb) {
+    const div = document.createElement("div");
+    div.className = "numbox";
+    div.style.marginBottom = "12px";
+    div.innerHTML = `<div class="numbox-lbl">المبلغ الذي ستحوّله</div>
+      <div class="numbox-val">${depAmt.toLocaleString()} <span style="font-size:14px;color:var(--mu)">ل.س</span></div>
+      <div class="numbox-sub">سيُضاف لمحفظتك: <strong style="color:var(--p)">$${(depAmt/RATE).toFixed(2)}</strong></div>`;
+    const btnEl = document.querySelector("#depBody .bp");
+    if (btnEl) btnEl.parentNode.insertBefore(div, btnEl);
+  } else if (nb && depAmt) {
+    nb.querySelector(".numbox-val").innerHTML = `${depAmt.toLocaleString()} <span style="font-size:14px;color:var(--mu)">ل.س</span>`;
+    nb.querySelector(".numbox-sub").innerHTML = `سيُضاف لمحفظتك: <strong style="color:var(--p)">$${(depAmt/RATE).toFixed(2)}</strong>`;
+  }
+}
+
+function depStep3SYP() {
+  if (!depAmt || depAmt < 5000) { toast("اختر مبلغاً للإيداع", "er"); return; }
+  const body = $("depBody");
+  const ttl  = $("depTtl");
+  ttl.textContent = "🔴 سيرياتيل كاش";
+  const usd = (depAmt / RATE).toFixed(2);
+  body.innerHTML = `
+    <div class="stbar">
+      <div class="sth dn">✓ المبلغ</div>
+      <div class="sth cur">٢ التحويل</div>
+      <div class="sth">٣ تم</div>
+    </div>
+    <div class="osum">
+      <div class="or"><span>المبلغ بالليرة</span><span style="font-weight:900;color:var(--p)">${depAmt.toLocaleString()} ل.س</span></div>
+      <div class="or"><span>يُضاف لمحفظتك</span><span style="font-weight:900;color:var(--grn)">$${usd}</span></div>
+    </div>
+    <div class="numbox">
+      <div class="numbox-lbl">🔴 رقم سيرياتيل كاش للتحويل</div>
+      <div class="numbox-val" style="font-size:26px">${SYR_NUM}</div>
+      <div class="numbox-sub">حوّل <strong>${depAmt.toLocaleString()} ل.س</strong> لهذا الرقم بالضبط</div>
+      <div class="copy-row" style="margin-top:10px">
+        <button class="cbtn" onclick="copyNum('${SYR_NUM}')">📋 نسخ الرقم</button>
+        <button class="cbtn" onclick="navigator.clipboard.writeText('${depAmt}').then(()=>toast('تم نسخ المبلغ','ok'))">📋 نسخ المبلغ</button>
+      </div>
+    </div>
+    <div class="wb">
+      📋 <strong>خطوات التحويل عبر سيرياتيل كاش:</strong><br>
+      1. افتح تطبيق سيرياتيل أو اتصل <strong style="direction:ltr">*3040#</strong><br>
+      2. اختر <strong>تحويل رصيد</strong><br>
+      3. أدخل الرقم: <strong style="direction:ltr">${SYR_NUM}</strong><br>
+      4. أدخل المبلغ: <strong>${depAmt.toLocaleString()} ل.س</strong><br>
+      5. أدخل رقمك أدناه وانتظر التحقق التلقائي
+    </div>
+    <div class="fg">
+      <label class="fl">📱 رقم سيرياتيل كاش الخاص بك <span style="color:var(--red)">*</span></label>
+      <input class="fi" id="custPhone" type="tel" placeholder="09XXXXXXXX" maxlength="10" style="font-size:16px;text-align:center;direction:ltr;letter-spacing:2px">
+      <div style="font-size:11px;color:var(--mu);margin-top:4px">رقمك مطلوب للتحقق التلقائي من التحويل</div>
+    </div>
+    <button class="bp" id="startPollBtn" onclick="startAutoCheckSYP()">
+      🚀 حوّلت المبلغ — تحقق تلقائياً
+    </button>
+    <button class="bs" onclick="renderDep(1)">← رجوع</button>
+  `;
+}
+
+function startAutoCheckSYP() {
+  const phoneEl = document.getElementById("custPhone");
+  const phone = phoneEl ? phoneEl.value.trim() : "";
+  if (!phone || phone.length < 9) {
+    toast("أدخل رقم سيرياتيل كاش الصحيح", "er");
+    return;
+  }
+  const btn = document.getElementById("startPollBtn");
+  if (btn) { btn.disabled = true; btn.innerHTML = '<div class="si"></div> جاري التحقق التلقائي...'; }
+
+  depInitTs = Math.floor(Date.now() / 1000);
+  pollCount = 0;
+
+  // Show polling UI
+  const body = $("depBody");
+  const usd = (depAmt / RATE).toFixed(2);
+  const pollBox = document.createElement("div");
+  pollBox.id = "pollBox";
+  pollBox.className = "poll-box";
+  pollBox.innerHTML = `
+    <div class="poll-ic">🔍</div>
+    <div class="poll-t">جاري التحقق التلقائي...</div>
+    <div class="poll-s">النظام يبحث عن تحويل بمبلغ<br><strong>${depAmt.toLocaleString()} ل.س</strong> من رقمك <strong style="direction:ltr">${phone}</strong></div>
+    <div class="poll-dots"><div class="poll-dot"></div><div class="poll-dot"></div><div class="poll-dot"></div></div>
+    <div class="poll-timer" id="pollCountdown">05:00</div>
+    <div class="poll-sub">الوقت المتبقي</div>
+  `;
+  const bsBtn = body.querySelector(".bs");
+  if (bsBtn) body.insertBefore(pollBox, bsBtn);
+  else body.appendChild(pollBox);
+
+  // Countdown
+  let remaining = POLL_MAX_ATTEMPTS * (POLL_INTERVAL_MS / 1000);
+  const cdTimer = setInterval(() => {
+    remaining = Math.max(0, remaining - 1);
+    const el = document.getElementById("pollCountdown");
+    if (el) {
+      const m = String(Math.floor(remaining/60)).padStart(2,"0");
+      const s = String(remaining%60).padStart(2,"0");
+      el.textContent = m+":"+s;
+    }
+    if (remaining <= 0) clearInterval(cdTimer);
+  }, 1000);
+
+  // Start polling API
+  doPollSYP(phone, cdTimer);
+  pollTimer = setInterval(() => doPollSYP(phone, cdTimer), POLL_INTERVAL_MS);
+}
+
+async function doPollSYP(phone, cdTimer) {
+  pollCount++;
+  if (pollCount > POLL_MAX_ATTEMPTS) {
+    stopPoll(); clearInterval(cdTimer); pollFailed(); return;
+  }
+  try {
+    const res = await fetch("/api/deposit/check-syr", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone, amountSYP: depAmt, afterTs: depInitTs }),
+    });
+    if (!res.ok) {
+      if (res.status === 503) {
+        stopPoll(); clearInterval(cdTimer);
+        pollApiUnconfigured("");
+        return;
+      }
+      return;
+    }
+    const data = await res.json();
+    if (data.found) {
+      stopPoll(); clearInterval(cdTimer);
+      // Credit wallet in USD
+      wallet += depAmt / RATE;
+      updateBal();
+      depSuccessSYP();
+    }
+  } catch { /* keep polling */ }
+}
+
+function depSuccessSYP() {
+  const usd = (depAmt / RATE).toFixed(2);
+  const txid = "DEP-" + Math.random().toString(36).slice(2,9).toUpperCase();
+  $("depTtl").textContent = "✅ تم الإيداع!";
+  $("depBody").innerHTML = `
+    <div class="sucbox">
+      <div class="suci">💰</div>
+      <div class="suct" style="color:var(--grn)">تم إضافة الرصيد!</div>
+      <div class="sucm">
+        تم تحويل <strong style="color:var(--p)">${depAmt.toLocaleString()} ل.س</strong><br>
+        وإضافة <strong style="color:var(--p)">$${usd}</strong> لمحفظتك تلقائياً ⚡
+      </div>
+      <div class="sucid">رقم الإيداع: ${txid}</div>
+      <div class="gb">💰 رصيدك الحالي: <strong style="font-size:16px">$${wallet.toFixed(2)}</strong></div>
+      <button class="bp" onclick="cls('depOv')">🛒 تسوق الآن</button>
+      <button class="bs" onclick="cls('depOv');nv('home')">🏠 الرئيسية</button>
+    </div>
+  `;
+}
+
+G.pickAmtSYP = pickAmtSYP;
+G.custAmtSYPChange = custAmtSYPChange;
+G.depStep3SYP = depStep3SYP;
+G.startAutoCheckSYP = startAutoCheckSYP;
+G.doPollSYP = doPollSYP;
+G.depSuccessSYP = depSuccessSYP;
+
+
+// ── Auto-start API after page loads ──
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(loadAPIProducts, 1200);
+});
+
+</script>
+</body>
+</html>
