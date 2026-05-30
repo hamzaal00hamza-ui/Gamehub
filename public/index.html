@@ -564,14 +564,16 @@ const PROFIT_MARGIN = 0.15; // 15% هامش ربح افتراضي — قابل �
 // ─── API HELPERS ───────────────────────────────────────────
 async function apiGet(path) {
   const url = API_BASE + path;
-  console.log('📡 GET:', url);
   const res = await fetch(url, { 
     method: 'GET',
     headers: { 'Accept': 'application/json' },
     mode: 'cors'
   });
-  if (!res.ok) throw new Error('HTTP ' + res.status + ' on ' + path);
+  if (!res.ok) throw new Error('HTTP ' + res.status);
   const data = await res.json();
+  // Handle both direct array and {status:"OK", data:[]} formats
+  if (data && data.status === 'OK' && data.data !== undefined) return data.data;
+  if (data && data.balance !== undefined) return data; // profile response
   return data;
 }
 
@@ -585,7 +587,10 @@ async function apiPost(path, params = {}) {
     body: JSON.stringify(body)
   });
   if (!res.ok) throw new Error('API Error ' + res.status);
-  return res.json();
+  const data = await res.json();
+  // FastCard returns {status:"OK", data:{order_id:...}}
+  if (data && data.status === 'OK') return data;
+  return data;
 }
 
 // ─── PRODUCTS CACHE ────────────────────────────────────────
