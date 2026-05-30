@@ -713,6 +713,8 @@ async function loadAPIProducts() {
       catMap[cat].push(p);
     });
     apiCategories = Object.entries(catMap).map(([name, items]) => ({ name, items }));
+    window.apiCategories = apiCategories;
+    window.apiProducts = apiProducts;
 
     hideApiLoader();
     renderAPIHome();
@@ -744,21 +746,17 @@ function renderAPIHome() {
   const homeGrid = document.querySelector('.cg');
   if (!homeGrid) return;
 
-  homeGrid.innerHTML = apiCategories.map(cat => {
+  // Show max 12 categories
+  const cats = apiCategories.slice(0, 12);
+  homeGrid.innerHTML = cats.map(cat => {
     const img = cat.items[0]?.category_image || cat.items[0]?.cat_image || cat.items[0]?.image || '';
     const ic = getCatIcon(cat.name);
-    return `<div class="fc-cat-card" onclick="openAPICategory('${encodeURIComponent(cat.name)}')">
-      ${img
-        ? `<img class="fc-cat-img" src="${img}" alt="${cat.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="fc-cat-img-ph" style="display:none">${ic}</div>`
-        : `<div class="fc-cat-img-ph">${ic}</div>`}
-      <div class="fc-cat-name">${cat.name}</div>
+    return `<div class="cc" style="cursor:pointer" onclick="openAPICategory('${encodeURIComponent(cat.name)}')">
+      <span class="ci">${ic}</span>
+      <div class="cn">${cat.name}</div>
+      <div class="cct">${cat.items.length} منتج</div>
     </div>`;
   }).join('');
-
-  // Override .cg grid style to 3 cols
-  homeGrid.style.display = 'grid';
-  homeGrid.style.gridTemplateColumns = 'repeat(3,1fr)';
-  homeGrid.style.gap = '10px';
 
   const statEls = document.querySelectorAll('.stn');
   if (statEls[1]) statEls[1].textContent = '+' + apiProducts.length;
@@ -1479,6 +1477,39 @@ const CATS = {
 };
 
 function oC(catKey) {
+  // If API loaded, use API categories
+  if (window.apiLoaded && window.apiCategories && window.apiCategories.length) {
+    const apiCat = window.apiCategories.find(c => c.name.toLowerCase().includes(catKey) || catKey.includes(c.name.toLowerCase()));
+    if (apiCat) {
+      openAPICategory(encodeURIComponent(apiCat.name));
+      return;
+    }
+    // Map local catKey to API category name
+    const catMap = {
+      'games': ['FREE FIRE','PUBG','CALL OF DUTY','Mobile Legends','فالورانت','Fortnite','Genshin','ROBLOX','E FOOTBALL'],
+      'chat':  ['Tik Tok','Bigo Live','Yalla Live','imo','Kwai'],
+      'cards': ['iTunes','Playstation','STEAM','Xbox','NETFLIX Card','RAZER GOLD'],
+      'subs':  ['NETFLIX','سبوتي فاي','Shahid VIP','Apple TV'],
+      'design':['Canva Pro','CapCut'],
+      'accounts':['CHAT GPT','Apple ID'],
+      'boost': ['Instagram','Facebook','YouTube','TikTok Boost'],
+      'balance':['USDT','SYRIATEL','MTN'],
+      'numbers':['أرقام واتساب','أرقام تيليغرام'],
+    };
+    const names = catMap[catKey] || [];
+    if (names.length) {
+      // Show filtered products from API
+      const filtered = window.apiProducts.filter(p =>
+        names.some(n => p.category_name && p.category_name.includes(n))
+      );
+      if (filtered.length) {
+        const fakeCatName = catKey;
+        window.apiCategories.push({ name: fakeCatName, items: filtered });
+        openAPICategory(encodeURIComponent(fakeCatName));
+        return;
+      }
+    }
+  }
   const cat = CATS[catKey];
   if (!cat) return;
   const ttl = $("cTtl");
