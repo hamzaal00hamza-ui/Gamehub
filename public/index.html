@@ -625,8 +625,21 @@ async function loadAPIProducts() {
   } catch (e) {
     hideApiLoader();
     console.error('❌ API Error:', e.message);
-    toast('⚠️ ' + e.message.slice(0,50), 'er');
+    // Show visible error with details
+    const errMsg = e.message || 'خطأ غير معروف';
+    toast('⚠️ فشل تحميل المنتجات: ' + errMsg.slice(0,80), 'er');
     apiLoaded = false;
+    // Show error on home page
+    const homeGrid = document.querySelector('.cg');
+    if (homeGrid) {
+      homeGrid.innerHTML = `
+        <div style="grid-column:1/-1;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:16px;text-align:center;font-size:13px;color:#fca5a5">
+          ⚠️ تعذّر الاتصال بالخادم<br>
+          <span style="font-size:11px;color:var(--mu);direction:ltr">${errMsg}</span><br><br>
+          <button onclick="loadAPIProducts()" style="background:var(--p);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:inherit">🔄 إعادة المحاولة</button>
+        </div>
+      `;
+    }
   }
 }
 
