@@ -595,6 +595,101 @@ let apiLoaded    = false;
 let apiBalance   = 0;
 
 // ─── LOAD ALL PRODUCTS FROM FASTCARD ───────────────────────
+
+// ═══════════════════════════════════════
+// STATIC PRODUCTS — FastCard Products
+// ═══════════════════════════════════════
+const STATIC_PRODUCTS = [
+  // FREE FIRE
+  {id:1001,name:"100 + 10 Diamonds",category_name:"FREE FIRE",price:0.95,sell_price:1.09,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:1002,name:"210 + 21 Diamonds",category_name:"FREE FIRE",price:1.90,sell_price:2.19,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:1003,name:"530 + 53 Diamonds",category_name:"FREE FIRE",price:4.75,sell_price:5.46,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:1004,name:"1080 + 108 Diamonds",category_name:"FREE FIRE",price:9.50,sell_price:10.93,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:1005,name:"2200 + 220 Diamonds",category_name:"FREE FIRE",price:19.00,sell_price:21.85,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:1006,name:"5600 + 560 Diamonds",category_name:"FREE FIRE",price:47.50,sell_price:54.63,available:true,auto:true,params:["Player ID"],image:"",},
+  // PUBG MOBILE
+  {id:2001,name:"60 UC AUTO",category_name:"PUBG MOBILE",price:0.93,sell_price:1.07,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:2002,name:"325 UC AUTO",category_name:"PUBG MOBILE",price:4.46,sell_price:5.13,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:2003,name:"660 UC AUTO",category_name:"PUBG MOBILE",price:8.91,sell_price:10.25,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:2004,name:"1800 UC AUTO",category_name:"PUBG MOBILE",price:22.41,sell_price:25.77,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:2005,name:"3850 UC AUTO",category_name:"PUBG MOBILE",price:44.30,sell_price:50.95,available:true,auto:true,params:["Player ID"],image:"",},
+  {id:2006,name:"8100 UC AUTO",category_name:"PUBG MOBILE",price:88.60,sell_price:101.89,available:true,auto:true,params:["Player ID"],image:"",},
+  // CALL OF DUTY
+  {id:3001,name:"80 CP",category_name:"CALL OF DUTY",price:1.00,sell_price:1.15,available:true,auto:true,params:["Activision ID"],image:"",},
+  {id:3002,name:"400 CP",category_name:"CALL OF DUTY",price:4.99,sell_price:5.74,available:true,auto:true,params:["Activision ID"],image:"",},
+  {id:3003,name:"800 CP",category_name:"CALL OF DUTY",price:9.99,sell_price:11.49,available:true,auto:true,params:["Activision ID"],image:"",},
+  {id:3004,name:"2000 CP",category_name:"CALL OF DUTY",price:19.99,sell_price:22.99,available:true,auto:true,params:["Activision ID"],image:"",},
+  // MOBILE LEGENDS
+  {id:4001,name:"86 Diamonds",category_name:"Mobile Legends",price:1.10,sell_price:1.27,available:true,auto:true,params:["Player ID (Server ID)"],image:"",},
+  {id:4002,name:"172 Diamonds",category_name:"Mobile Legends",price:2.20,sell_price:2.53,available:true,auto:true,params:["Player ID (Server ID)"],image:"",},
+  {id:4003,name:"706 Diamonds",category_name:"Mobile Legends",price:8.80,sell_price:10.12,available:true,auto:true,params:["Player ID (Server ID)"],image:"",},
+  {id:4004,name:"2195 Diamonds",category_name:"Mobile Legends",price:27.00,sell_price:31.05,available:true,auto:true,params:["Player ID (Server ID)"],image:"",},
+  // VALORANT
+  {id:5001,name:"475 VP",category_name:"فالورانت تركي",price:4.50,sell_price:5.18,available:true,auto:true,params:["Riot Email"],image:"",},
+  {id:5002,name:"1000 VP",category_name:"فالورانت تركي",price:9.00,sell_price:10.35,available:true,auto:true,params:["Riot Email"],image:"",},
+  {id:5003,name:"2050 VP",category_name:"فالورانت تركي",price:17.50,sell_price:20.13,available:true,auto:true,params:["Riot Email"],image:"",},
+  {id:5004,name:"3650 VP",category_name:"فالورانت تركي",price:30.00,sell_price:34.50,available:true,auto:true,params:["Riot Email"],image:"",},
+  // FORTNITE
+  {id:6001,name:"1000 V-Bucks",category_name:"Fortnite",price:7.99,sell_price:9.19,available:true,auto:true,params:["Epic Games Email"],image:"",},
+  {id:6002,name:"2800 V-Bucks",category_name:"Fortnite",price:19.99,sell_price:22.99,available:true,auto:true,params:["Epic Games Email"],image:"",},
+  {id:6003,name:"5000 V-Bucks",category_name:"Fortnite",price:31.99,sell_price:36.79,available:true,auto:true,params:["Epic Games Email"],image:"",},
+  // GENSHIN
+  {id:7001,name:"60 Genesis Crystals",category_name:"Genshin Impact",price:1.00,sell_price:1.15,available:true,auto:true,params:["UID اللعبة"],image:"",},
+  {id:7002,name:"300 Genesis Crystals",category_name:"Genshin Impact",price:4.99,sell_price:5.74,available:true,auto:true,params:["UID اللعبة"],image:"",},
+  {id:7003,name:"980 Genesis Crystals",category_name:"Genshin Impact",price:14.99,sell_price:17.24,available:true,auto:true,params:["UID اللعبة"],image:"",},
+  {id:7004,name:"1980 Genesis Crystals",category_name:"Genshin Impact",price:29.99,sell_price:34.49,available:true,auto:true,params:["UID اللعبة"],image:"",},
+  // ROBLOX
+  {id:8001,name:"400 Robux",category_name:"ROBLOX",price:4.99,sell_price:5.74,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:8002,name:"800 Robux",category_name:"ROBLOX",price:9.99,sell_price:11.49,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:8003,name:"1700 Robux",category_name:"ROBLOX",price:19.99,sell_price:22.99,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  // TikTok
+  {id:9001,name:"70 Coins",category_name:"Tik Tok",price:1.20,sell_price:1.38,available:true,auto:true,params:["TikTok Username"],image:"",},
+  {id:9002,name:"350 Coins",category_name:"Tik Tok",price:5.50,sell_price:6.33,available:true,auto:true,params:["TikTok Username"],image:"",},
+  {id:9003,name:"700 Coins",category_name:"Tik Tok",price:10.99,sell_price:12.64,available:true,auto:true,params:["TikTok Username"],image:"",},
+  {id:9004,name:"1400 Coins",category_name:"Tik Tok",price:21.00,sell_price:24.15,available:true,auto:true,params:["TikTok Username"],image:"",},
+  // BIGO
+  {id:10001,name:"70 Diamonds",category_name:"Bigo Live",price:1.00,sell_price:1.15,available:true,auto:true,params:["Bigo ID"],image:"",},
+  {id:10002,name:"350 Diamonds",category_name:"Bigo Live",price:5.00,sell_price:5.75,available:true,auto:true,params:["Bigo ID"],image:"",},
+  {id:10003,name:"1400 Diamonds",category_name:"Bigo Live",price:20.00,sell_price:23.00,available:true,auto:true,params:["Bigo ID"],image:"",},
+  // iTunes
+  {id:11001,name:"$5 iTunes US",category_name:"iTunes Card",price:5.50,sell_price:6.33,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:11002,name:"$10 iTunes US",category_name:"iTunes Card",price:11.00,sell_price:12.65,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:11003,name:"$25 iTunes US",category_name:"iTunes Card",price:27.00,sell_price:31.05,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:11004,name:"$50 iTunes US",category_name:"iTunes Card",price:54.00,sell_price:62.10,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:11005,name:"$100 iTunes US",category_name:"iTunes Card",price:105.00,sell_price:120.75,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  // PlayStation
+  {id:12001,name:"$10 PSN US",category_name:"Playstation",price:11.00,sell_price:12.65,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:12002,name:"$25 PSN US",category_name:"Playstation",price:27.00,sell_price:31.05,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:12003,name:"$50 PSN US",category_name:"Playstation",price:53.00,sell_price:60.95,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  // Steam
+  {id:13001,name:"$5 Steam",category_name:"STEAM",price:5.50,sell_price:6.33,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:13002,name:"$10 Steam",category_name:"STEAM",price:11.00,sell_price:12.65,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:13003,name:"$20 Steam",category_name:"STEAM",price:22.00,sell_price:25.30,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  {id:13004,name:"$50 Steam",category_name:"STEAM",price:54.00,sell_price:62.10,available:true,auto:false,params:["البريد الإلكتروني"],image:"",},
+  // Netflix
+  {id:14001,name:"شهر أساسي",category_name:"NETFLIX",price:4.50,sell_price:5.18,available:true,auto:false,params:["بريد Netflix"],image:"",},
+  {id:14002,name:"شهر ستاندرد",category_name:"NETFLIX",price:7.00,sell_price:8.05,available:true,auto:false,params:["بريد Netflix"],image:"",},
+  {id:14003,name:"شهر بريميوم",category_name:"NETFLIX",price:10.00,sell_price:11.50,available:true,auto:false,params:["بريد Netflix"],image:"",},
+  // Spotify
+  {id:15001,name:"شهر",category_name:"سبوتي فاي",price:3.00,sell_price:3.45,available:true,auto:false,params:["بريد Spotify"],image:"",},
+  {id:15002,name:"3 أشهر",category_name:"سبوتي فاي",price:8.00,sell_price:9.20,available:true,auto:false,params:["بريد Spotify"],image:"",},
+  {id:15003,name:"6 أشهر",category_name:"سبوتي فاي",price:15.00,sell_price:17.25,available:true,auto:false,params:["بريد Spotify"],image:"",},
+  {id:15004,name:"سنة كاملة",category_name:"سبوتي فاي",price:28.00,sell_price:32.20,available:true,auto:false,params:["بريد Spotify"],image:"",},
+  // Shahid
+  {id:16001,name:"شهر",category_name:"Shahid VIP",price:4.00,sell_price:4.60,available:true,auto:false,params:["بريد شاهد"],image:"",},
+  {id:16002,name:"3 أشهر",category_name:"Shahid VIP",price:10.00,sell_price:11.50,available:true,auto:false,params:["بريد شاهد"],image:"",},
+  {id:16003,name:"سنة",category_name:"Shahid VIP",price:35.00,sell_price:40.25,available:true,auto:false,params:["بريد شاهد"],image:"",},
+  // Canva
+  {id:17001,name:"شهر",category_name:"Canva Pro",price:5.00,sell_price:5.75,available:true,auto:false,params:["بريد Canva"],image:"",},
+  {id:17002,name:"سنة",category_name:"Canva Pro",price:40.00,sell_price:46.00,available:true,auto:false,params:["بريد Canva"],image:"",},
+  // ChatGPT
+  {id:18001,name:"ChatGPT Plus شهري",category_name:"CHAT GPT",price:22.00,sell_price:25.30,available:true,auto:false,params:[],image:"",},
+  // Yalla
+  {id:19001,name:"66 Coins",category_name:"Yalla Live",price:1.00,sell_price:1.15,available:true,auto:true,params:["Yalla ID"],image:"",},
+  {id:19002,name:"330 Coins",category_name:"Yalla Live",price:5.00,sell_price:5.75,available:true,auto:true,params:["Yalla ID"],image:"",},
+  {id:19003,name:"1650 Coins",category_name:"Yalla Live",price:25.00,sell_price:28.75,available:true,auto:true,params:["Yalla ID"],image:"",},
+];
+
 async function loadAPIProducts() {
   try {
     showApiLoader();
